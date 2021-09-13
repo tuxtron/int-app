@@ -1,0 +1,112 @@
+.container {
+    background-color: var(--background-dark);
+}
+
+.features-section {
+    height: 500px;
+}
+
+.react-multi-carousel-item {
+    max-width: 669px;
+    min-width: 669px;
+}
+
+.active-feature-card {
+    height: 377px !important;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: cover;
+    padding: 0 7.5px;
+    transition: all 200ms ease-in-out;
+}
+
+.blur-feature-card {
+    filter: blur(2px);
+    height: 282px !important;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: cover;
+    padding: 0 7.5px;
+    transition: all 200ms ease-in-out;
+}
+
+.feature-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 15px !important;
+    object-fit: cover !important;
+}
+
+.category-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 1650px;
+}
+
+.category-title {
+    align-self: flex-start;
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 29px;
+    letter-spacing: 0.019px;
+    color: #F5F5F5;
+}
+
+/* -------------- CUSTOM SLICKER -------------- */
+
+.features-section {
+    .slick-next {
+        right: 25px;
+        z-index: 5;
+    }
+    
+    .slick-prev {
+        z-index: 5;
+        left: 25px;
+    }
+    
+    .slick-slider {
+        margin-top: 80px;
+        padding-bottom: 50px;
+    }
+    
+    .slick-track {
+        display: flex;
+        align-items: center !important;
+        height: 381px;
+    }
+    
+    .slick-slide > div {
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+    
+    .custon-dot-class {
+        background-color: transparent;
+    }
+    
+    .slick-dots {
+        margin-top: 50px;
+    }
+    
+    .slick-dots > li.slick-active > button:before {
+        color: #F4AA3F;
+        opacity: 1;
+    
+    }
+    
+    .slick-dots > li > button:before {
+        color: #707070;
+        opacity: 0.2;
+    }
+}
+
+/* ------------ CUSTOM SLICKER ENDS ------------ */

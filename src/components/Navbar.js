@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from './Button';
 import { Link } from 'react-router-dom';
+import searchIcon from '../assets/icons/search.svg';
 import './Navbar.css';
 
 function Navbar() {
@@ -39,6 +40,12 @@ function Navbar() {
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
           </div>
           <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+            <div className="search-section">
+                <div className="search-box">
+                    <img className="search-icon" src={searchIcon} alt="search" />
+                    <input className="search-input" type="text" placeholder="Qué estás buscando?" />
+                </div>
+            </div>
             <li className='nav-item'>
               <Link to='/products' className='nav-links' onClick={closeMobileMenu}>
                 Paquetes
