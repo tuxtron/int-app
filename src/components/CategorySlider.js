@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Slider from "react-slick";
+import { Link } from 'react-router-dom';
 
 import './CategorySlider.scss';
 import "react-multi-carousel/lib/styles.css";
@@ -75,9 +76,11 @@ function CategorySlider() {
         {
             categoryMovies.map(movie => {
                 return (
-                    <div className="category-movie-card">
+                    <Link to='/detail'>
+                        <div className="category-movie-card">
                             <img className="movie-img" src={movie.url} alt="movie" />
-                    </div>
+                        </div>
+                    </Link>
                 )
             })
         }
