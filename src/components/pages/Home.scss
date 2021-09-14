@@ -12,13 +12,14 @@
 }
 
 .active-feature-card {
-    height: 377px !important;
+    height: 330px !important;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
     object-fit: cover;
     padding: 0 7.5px;
+    transform: scale(1.15);
     transition: all 200ms ease-in-out;
 }
 
@@ -31,6 +32,7 @@
     justify-content: center;
     object-fit: cover;
     padding: 0 7.5px;
+    transform: scale(0.85);
     transition: all 200ms ease-in-out;
 }
 
@@ -48,6 +50,25 @@
     justify-content: center;
     margin: 0 auto;
     max-width: 1650px;
+
+    @media screen and (min-width: 1500px) and (max-width: 1740px) {
+        max-width: 1400px;
+    }
+    @media screen and (min-width: 1366px) and (max-width: 1499px) {
+        max-width: 1200px;
+    }
+    @media screen and (min-width: 1100px) and (max-width: 1365px) {
+        max-width: 900px;
+    }
+    @media screen and (min-width: 800px) and (max-width: 1099px) {
+        max-width: 720px;
+    }
+    @media screen and (min-width: 600px) and (max-width: 799px) {
+        max-width: 480px;
+    }
+    @media screen and (max-width: 599px) {
+        max-width: 240px;
+    }
 }
 
 .category-title {

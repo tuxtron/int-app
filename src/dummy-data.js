@@ -38,7 +38,7 @@ export const categoryMovies = [
         url: 'https://m.media-amazon.com/images/I/91WNnQZdybL._AC_SL1500_.jpg',
     },
     {
-        url: 'https://lh3.googleusercontent.com/proxy/mqEdKAB3U-E6tCv4Bz3kEvnBIqWz1EI20bj07dwaUGqzsFItbd_JKvi8qsiAKXpQgHSmcEkLGDfEK5S5LOymkFJMEP_gDPwb-qd6DDXe0a0ZAFsoN6o',
+        url: 'https://img.buzzfeed.com/buzzfeed-static/static/2020-10/27/21/asset/2eae1b7041a8/sub-buzz-2749-1603833440-24.jpg',
     },
     {
         url: 'https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1280x1280/products/87889/89755/Suicide-Squad-Final-Style-Mushroom-Cloud-Poster-buy-original-movie-posters-at-starstills__53963.1469011134.jpg?c=2?imbypass=on',

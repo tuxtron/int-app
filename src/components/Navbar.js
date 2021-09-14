@@ -51,7 +51,7 @@ function Navbar() {
                 Paquetes
               </Link>
             </li>
-            <li className='nav-item'>
+            {/* <li className='nav-item'>
               <Link
                 to='/home'
                 className='nav-links'
@@ -59,7 +59,7 @@ function Navbar() {
               >
                 Iniciar Sesión
               </Link>
-            </li>
+            </li> */}
 
             <li>
               <Link

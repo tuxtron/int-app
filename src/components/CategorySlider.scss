@@ -3,6 +3,10 @@
     width: 100%;
     margin: 46px 0 60px 0;
 
+    @media screen and (max-width: 1740px) {
+
+    }
+
     .category-movie-card {
         display: flex;
         align-items: center;

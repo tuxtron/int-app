@@ -17,7 +17,50 @@ function CategorySlider() {
         slidesToShow: 7,
         slidesToScroll: 1,
         initialSlide: 0,
-        responsive: [],
+        responsive: [
+            {
+                breakpoint: 1740,
+                settings: {
+                  slidesToShow: 6,
+                  slidesToScroll: 1,
+                }
+            },
+            {
+                breakpoint: 1499,
+                settings: {
+                  slidesToShow: 5,
+                  slidesToScroll: 1,
+                }
+            },
+            {
+                breakpoint: 1365,
+                settings: {
+                  slidesToShow: 4,
+                  slidesToScroll: 1,
+                }
+            },
+            {
+                breakpoint: 1099,
+                settings: {
+                  slidesToShow: 3,
+                  slidesToScroll: 3,
+                }
+            },
+            {
+                breakpoint: 899,
+                settings: {
+                  slidesToShow: 2,
+                  slidesToScroll: 2,
+                }
+            },
+            {
+                breakpoint: 500,
+                settings: {
+                  slidesToShow: 1,
+                  slidesToScroll: 1,
+                }
+            },
+        ],
         swipeToSlide: true,
         afterChange: function(index) {
             console.log(

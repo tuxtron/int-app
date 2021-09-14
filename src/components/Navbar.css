@@ -54,7 +54,8 @@
 }
 
 .search-box {
-    width: 422px;
+    /* width: 422px; */
+    width: 100%;
     height: 50px;
     background: rgba(133, 133, 133, 0.47);
     border-radius: 15px;
