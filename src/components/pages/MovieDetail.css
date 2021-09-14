@@ -1,3 +1,121 @@
 .detail-container {
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-link{
+    text-decoration: none;
+}
+
+.detail-button{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 48px;
+    gap: 12px;
+    margin: 28px 0px 28px 4%;
+
+}
+
+.detail-back-button-text{
+    font-family: "Raleway";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 23px;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.detail-card{
+    align-self: center ;
+    width: 1323px;
+    height: 594px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.26) 0%, rgba(0, 0, 0, 0.99) 100%) , url("https://as01.epimg.net/epik/imagenes/2020/08/04/portada/1596535756_527518_1596535915_noticia_normal.jpg");
+    border-radius: 24px;
+    border: 2.5px solid #D1923C;
+    box-sizing: border-box;
+    border-radius: 24px;
+    padding: 50px 80px;
+    display: flex;
+
+
+}
+
+.detail-movie-title{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 47px;
+    color: #FFFFFF;
+
+}
+.detail-tags{
+    font-family: "Raleway";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 15px;
+    color: #FFFFFF;
+    background: rgba(212, 147, 55, 0.5);
+    backdrop-filter: blur(2px);
+    border-radius: 17.5px;
+    padding: 5px 18px;
+}
+
+.tags-rows{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 28px;
+}
+
+.detail-descriptions{
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 23px;
+    line-height: 27px;
+    color: #FFFFFF;
+    margin-top: 28px;
+}
+
+.detail-card-left{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.detail-card-rigth{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.detail-card-rigth-play{
+    width: 193px;
+    height: 49px;
+    background: rgba(244, 170, 63, 0.8);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.detail-play{
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 23px;
+    line-height: 27px;
+    color: #FFFFFF;
+}
+.rectangulo{
+    background: rgba(255, 177, 65, 0.8);
+    width: 120px;
+    height: 6px;
 }

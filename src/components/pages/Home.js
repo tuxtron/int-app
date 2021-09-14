@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import CategorySlider from '../CategorySlider';
 import './Home.scss';
 import "react-multi-carousel/lib/styles.css";
+import { Link } from 'react-router-dom';
 
 import { featureMovies } from "../../dummy-data";
 
@@ -66,9 +67,11 @@ function Home() {
                 {
                     featureMovies.map((movie, index) => {
                         return (
+                          <Link to='/detail'>
                             <div className={index === currentSlide ? 'active-feature-card' : 'blur-feature-card'}>
                                 <img className="feature-img" src={movie.url} alt="movie" />
                             </div>
+                        </Link>     
                         )
                     })
                 }
