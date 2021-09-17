@@ -17,7 +17,7 @@ function Login() {
           <input className="search-input" type="text" placeholder="Contraseña" />
         </div>
         <div className="sesion-section" >  
-          <p className="iniciarSesion" >Iniciar Sesión</p>
+          <Link to="/Home" className="link-registar"> Iniciar Sesión </Link>
           </div>
         <p className="registarte"> Aun no tienes cuenta? <Link className="link-registar"> Registrate </Link></p>
       </div>
