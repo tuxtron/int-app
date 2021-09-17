@@ -9,6 +9,9 @@ import Products from './components/pages/Products';
 import SignUp from './components/pages/SignUp';
 import MovieDetail from './components/pages/MovieDetail';
 import HomeFooter from './components/HomeFooter';
+import Login from './components/pages/Login';
+
+
 
 function App() {
   return (
@@ -21,6 +24,7 @@ function App() {
           <Route path='/services' component={Services} />
           <Route path='/products' component={Products} />
           <Route path='/sign-up' component={SignUp} />
+          <Route path='/login' component={Login} />
           <Route path='/detail' component={MovieDetail} />
         </Switch>
         <HomeFooter />
