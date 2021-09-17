@@ -41,7 +41,6 @@
   text-align: center;
   width: 60vw;
   justify-content: end;
-  margin-right: 2rem;
 }
 
 /* NavBar search box */
@@ -94,6 +93,7 @@
   text-decoration: none;
   padding: 0.5rem 1rem;
   height: 100%;
+  width: 150px;
 }
 
 .nav-links:hover {

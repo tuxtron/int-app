@@ -29,10 +29,11 @@ function MovieDetail() {
               2001
             </span>
             <span className="detail-tags">
-              accion
+              acción
             </span>
             <span className="detail-tags">
-              9.5
+                <span>★ </span>
+                <span> 9.5</span>
             </span>
           </div>
           <p className="detail-descriptions">

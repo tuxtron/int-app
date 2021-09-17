@@ -47,8 +47,8 @@ function Navbar() {
                 </div>
             </div>
             <li className='nav-item'>
-              <Link to='/products' className='nav-links' onClick={closeMobileMenu}>
-                Paquetes
+              <Link to='/sign-in' className='nav-links' onClick={closeMobileMenu}>
+                Iniciar Sesión
               </Link>
             </li>
             {/* <li className='nav-item'>
