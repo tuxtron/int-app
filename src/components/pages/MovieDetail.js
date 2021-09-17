@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './MovieDetail.css';
 import arrowimage from "../../assets/icons/arrowRight.svg"
 import { Link } from 'react-router-dom';
@@ -11,7 +11,7 @@ function MovieDetail() {
     <div className="detail-container">
       <Link to="/Home" className="detail-link">
       <div className="detail-button">
-        <img src={arrowimage}/>
+        <img src={arrowimage} alt="arrow"/>
         <p className="detail-back-button-text">
           Volver
         </p>

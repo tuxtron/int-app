@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Slider from "react-slick";
 import { Link } from 'react-router-dom';
 
@@ -8,8 +8,6 @@ import "react-multi-carousel/lib/styles.css";
 import { categoryMovies } from '../dummy-data';
 
 function CategorySlider() {
-
-    const [ currentSlide, setCurrentSlide ] = useState(0);
 
     var settings = {
         dots: false,
