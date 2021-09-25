@@ -42,9 +42,11 @@ function MovieDetail() {
         </div>
         <div className="detail-card-rigth">
           <div className="detail-card-rigth-play">
+            <Link to='/player' url='/videos/video-1.mp4' className="detail-link">
             <p className="detail-play">
               Reproducir
             </p>
+            </Link>
           </div>
         </div>
         
