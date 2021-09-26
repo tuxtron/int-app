@@ -8,6 +8,7 @@ import Services from './components/pages/Services';
 import SignIn from './components/pages/SignIn';
 import SignUp from './components/pages/SignUp';
 import MovieDetail from './components/pages/MovieDetail';
+import Player from './components/pages/Player';
 import HomeFooter from './components/HomeFooter';
 import Login from './components/pages/Login';
 
@@ -26,6 +27,7 @@ function App() {
           <Route path='/sign-up' component={SignUp} />
           <Route path='/login' component={Login} />
           <Route path='/detail' component={MovieDetail} />
+          <Route path='/player' component={Player} />
         </Switch>
         <HomeFooter />
       </Router>
