@@ -9,6 +9,9 @@ import SignIn from './components/pages/SignIn';
 import SignUp from './components/pages/SignUp';
 import MovieDetail from './components/pages/MovieDetail';
 import HomeFooter from './components/HomeFooter';
+import Login from './components/pages/Login';
+
+
 
 function App() {
   return (
@@ -21,6 +24,7 @@ function App() {
           <Route path='/services' component={Services} />
           <Route path='/sign-in' component={SignIn} />
           <Route path='/sign-up' component={SignUp} />
+          <Route path='/login' component={Login} />
           <Route path='/detail' component={MovieDetail} />
         </Switch>
         <HomeFooter />
