@@ -1,9 +1,10 @@
 import React from 'react';
 import './Footer.css';
 import { Button } from './Button';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 function Footer() {
+
   return (
     <div className='footer-container'>
       <section className='footer-subscription'>

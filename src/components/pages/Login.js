@@ -19,7 +19,7 @@ function Login() {
         <div className="sesion-section" >  
           <Link to="/Home" className="link-registar"> Iniciar Sesión </Link>
           </div>
-        <p className="registarte"> Aun no tienes cuenta? <Link className="link-registar"> Registrate </Link></p>
+        <p className="registarte"> Aun no tienes cuenta? <Link to="/sign-up" className="link-registar"> Registrate </Link></p>
       </div>
     </div>
   );

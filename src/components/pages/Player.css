@@ -1,6 +1,5 @@
 .player-container {
     margin: 0 auto;
-    height: 100vh;
     display: flex;
     /*justify-content: center;
     flex-direction: column;*/
@@ -9,6 +8,8 @@
 
 .player {
     background-color: transparent !important;
+    width: 100% !important;
+    height: 90vh !important;
 }
 
 .detail-link{
