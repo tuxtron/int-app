@@ -2,7 +2,8 @@
     height: 100vh;
     display: flex;
     align-items: center;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.26) 0%, rgba(0, 0, 0, 0.99) 100%) , url("https://img.microsiervos.com/Peliculas-Ready-Player-One.jpg");
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.26) 0%, rgba(0, 0, 0, 0.99) 100%) , url("../../assets/images/login-bg.png");
+    background-size: 100%;
 }
 
 .login-container{
@@ -80,6 +81,7 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 38px;
+    text-decoration: none;
 }
 
 .iniciarSesion{
@@ -103,7 +105,17 @@
 
 
 .link-registar{
+    text-decoration: none;
+    font-size: 20px;
+    line-height: 21px;
+    color: #FFFFFF;
+}
+
+.underline {
+    margin-left: 5px;
     font-size: 18px;
     line-height: 21px;
     color: #FFFFFF;
+    text-decoration: underline;
+    cursor: pointer;
 }

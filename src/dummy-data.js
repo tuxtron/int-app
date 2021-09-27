@@ -23,43 +23,98 @@ export const featureMovies = [
 
 export const categoryMovies = [
     {
-        url: 'https://cps-static.rovicorp.com/2/Open/Disney_Media_Distribution/Program/37403911/_derived_jpg_q90_310x470_m0/Black_Widow_3x4_6_1628074323937_8.jpg',
+        movie: {
+            image: 'https://cps-static.rovicorp.com/2/Open/Disney_Media_Distribution/Program/37403911/_derived_jpg_q90_310x470_m0/Black_Widow_3x4_6_1628074323937_8.jpg'
+        },
     },
     {
-        url: 'https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1280x1280/products/89058/93685/Joker-2019-Final-Style-steps-Poster-buy-original-movie-posters-at-starstills__62518.1572351179.jpg?c=2?imbypass=on',
+        movie: {
+            image: 'https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1280x1280/products/89058/93685/Joker-2019-Final-Style-steps-Poster-buy-original-movie-posters-at-starstills__62518.1572351179.jpg?c=2?imbypass=on',
+        },
+
     },
     {
-        url: 'https://www.komar.de/en/media/catalog/product/cache/5/image/9df78eab33525d08d6e5fb8d27136e95/v/d/vd-046-star-wars-official-poster-ep7.jpg',
+        movie: {
+            image: 'https://www.komar.de/en/media/catalog/product/cache/5/image/9df78eab33525d08d6e5fb8d27136e95/v/d/vd-046-star-wars-official-poster-ep7.jpg',
+        },
+
     },
     {
-        url: 'https://www.washingtonpost.com/graphics/2019/entertainment/oscar-nominees-movie-poster-design/img/black-panther-web.jpg',
+        movie: {
+            image: 'https://www.washingtonpost.com/graphics/2019/entertainment/oscar-nominees-movie-poster-design/img/black-panther-web.jpg',
+        },
+
     },
     {
-        url: 'https://m.media-amazon.com/images/I/91WNnQZdybL._AC_SL1500_.jpg',
+        movie: {
+            image: 'https://m.media-amazon.com/images/I/91WNnQZdybL._AC_SL1500_.jpg',
+
+        },
     },
     {
-        url: 'https://img.buzzfeed.com/buzzfeed-static/static/2020-10/27/21/asset/2eae1b7041a8/sub-buzz-2749-1603833440-24.jpg',
+        movie: {
+            image: 'https://img.buzzfeed.com/buzzfeed-static/static/2020-10/27/21/asset/2eae1b7041a8/sub-buzz-2749-1603833440-24.jpg',
+        },
+
     },
     {
-        url: 'https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1280x1280/products/87889/89755/Suicide-Squad-Final-Style-Mushroom-Cloud-Poster-buy-original-movie-posters-at-starstills__53963.1469011134.jpg?c=2?imbypass=on',
+        movie: {
+            image: 'https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1280x1280/products/87889/89755/Suicide-Squad-Final-Style-Mushroom-Cloud-Poster-buy-original-movie-posters-at-starstills__53963.1469011134.jpg?c=2?imbypass=on',
+        },
+
     },
     {
-        url: 'https://www.bestmovieposters.co.uk/wp-content/uploads/2019/01/inCmCRl_.jpeg',
+        movie: {
+            image: 'https://www.bestmovieposters.co.uk/wp-content/uploads/2019/01/inCmCRl_.jpeg',
+        },
     },
     {
-        url: 'http://usa.chinadaily.com.cn/culture/img/attachement/jpg/site1/20170326/f04da2db14841a419ea21f.jpg'
+        movie: {
+            image: 'http://usa.chinadaily.com.cn/culture/img/attachement/jpg/site1/20170326/f04da2db14841a419ea21f.jpg'
+        },
+
     },
     {
-        url: 'https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1280x1280/products/88996/93194/Toy-Story-4-FInal-Style-Poster-buy-original-movie-posters-at-starstills__38785.1563972734.jpg?c=2?imbypass=on'
+        movie: {
+            image: 'https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1280x1280/products/88996/93194/Toy-Story-4-FInal-Style-Poster-buy-original-movie-posters-at-starstills__38785.1563972734.jpg?c=2?imbypass=on'
+        },
     },
     {
-        url: 'https://media.glamour.com/photos/56957ec78fa134644ec24e88/master/w_1600%2Cc_limit/entertainment-2014-06-the-giver-movie-poster-main.jpg'
+        movie: {
+            image: 'https://media.glamour.com/photos/56957ec78fa134644ec24e88/master/w_1600%2Cc_limit/entertainment-2014-06-the-giver-movie-poster-main.jpg'
+        },
     },
     {
-        url: 'https://assets-prd.ignimgs.com/2021/03/24/mortal-kombat-poster2-1616630238403.jpeg'
+        movie: {
+            image: 'https://assets-prd.ignimgs.com/2021/03/24/mortal-kombat-poster2-1616630238403.jpeg'
+
+        },
     },
     {
-        url: 'https://i.redd.it/hutqvp8fovv51.jpg'
+        movie: {
+            image: 'https://i.redd.it/hutqvp8fovv51.jpg'
+        },
     },
 
+];
+
+export const packages = [
+    {
+        name: 'básico',
+        price: 500,
+        features: [
+            'Catálogo reducido',
+            'Hasta 1 pantalla a la vez',
+            'Sin subtítulos'
+        ]
+    }, 
+    {
+        name: 'básico',
+        price: 750,
+        features: [
+            'Catálogo completo',
+            'Hasta 3 pantalla a la vez',
+            'Con subtítulos'
+        ]
+    }
 ]

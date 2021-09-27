@@ -1,10 +1,21 @@
 import React from 'react';
 import './MovieDetail.css';
 import arrowimage from "../../assets/icons/arrowRight.svg"
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 
-function MovieDetail() {
+function MovieDetail(props) {
+
+    let movie = props.location.movie;
+    const categories = useSelector(state => state.movies.categories);
+    let { category, movieName } = useParams();
+
+    if (!movie) {
+        movie = categories.filter(c => c.name === category)[0].movies.filter(m => m.movie.title === movieName)[0].movie;
+
+    }
+
 
   return (
 
@@ -17,32 +28,43 @@ function MovieDetail() {
         </p>
       </div>
       </Link>
-      <div className="detail-card">
+      <div 
+        className="detail-card" 
+        style={{ 
+            background: `linear-gradient(180deg, rgba(0, 0, 0, 0.26) 0%, rgba(0, 0, 0, 0.99) 100%), url(${movie.image})`, 
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center'
+        }}>
         <div className="detail-card-left">
-          <h2 className="detail-movie-title">
-            El señor de los anillos
-          </h2>
-          <div className="rectangulo">
-          </div>
+            <p className="detail-movie-title">
+                {movie.title}
+            </p>
           <div className="tags-rows">
             <span className="detail-tags">
-              2001
+              {movie.launch.split(' ')[0].split('/')[2]}
             </span>
             <span className="detail-tags">
-              acción
+              {category}
             </span>
             <span className="detail-tags">
                 <span>★ </span>
-                <span> 9.5</span>
+                <span>{movie.value.split('/')[0]}</span>
             </span>
           </div>
           <p className="detail-descriptions">
-          El viaje de La Comunidad del Anillo está llegando a su fin. Las fuerzas de Sauron han atacado Minas Tirith, la capital de Gondor, en su asedio definitivo contra la humanidad.
+            {movie.description}
           </p>
         </div>
         <div className="detail-card-rigth">
           <div className="detail-card-rigth-play">
-            <Link to='/player' url='/videos/video-1.mp4' className="detail-link">
+            <Link 
+                to={{
+                    pathname: `/player/${category}/${movieName}`,
+                    movieUrl: movie.movieUrl
+                }}
+                className="detail-link"
+            >
             <p className="detail-play">
               Reproducir
             </p>

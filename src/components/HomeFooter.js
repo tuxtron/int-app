@@ -7,8 +7,13 @@ function HomeFooter() {
 
     const location = useLocation();
 
+    const showFooter = () => {
+        const currentPathArr = location.pathname.split('/');
+        return !['player', 'sign-up', 'login', 'detail'].includes(currentPathArr[1]);
+    }
+
   return (
-      !location.pathname.includes('player') ? (
+      showFooter() ? (
         <div className="home-footer-container">
             <Link to='/' className='navbar-logo'>
                 <img

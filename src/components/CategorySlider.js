@@ -7,11 +7,14 @@ import "react-multi-carousel/lib/styles.css";
 
 import { categoryMovies } from '../dummy-data';
 
-function CategorySlider() {
+function CategorySlider(props) {
+
+    console.log('MOVIES: ', props.movies);
+    const category = props.category;
 
     var settings = {
         dots: false,
-        infinite: true,
+        infinite: props.movies.length >= 8,
         speed: 500,
         slidesToShow: 7,
         slidesToScroll: 1,
@@ -72,11 +75,18 @@ function CategorySlider() {
     <div className="category-container">
         <Slider {...settings}>
         {
-            categoryMovies.map(movie => {
+            props.movies.map(m => {
+            // categoryMovies.map(m => {
                 return (
-                    <Link to='/detail'>
+                    <Link 
+                        to={{
+                            pathname: `/detail/${category}/${m.movie.title}`,
+                            movie: m.movie,
+                            category
+                        }}
+                    >
                         <div className="category-movie-card">
-                            <img className="movie-img" src={movie.url} alt="movie" />
+                            <img className="movie-img" src={m.movie.imageMobile} alt="movie" />
                         </div>
                     </Link>
                 )

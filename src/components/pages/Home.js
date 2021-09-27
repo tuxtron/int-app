@@ -4,10 +4,15 @@ import CategorySlider from '../CategorySlider';
 import './Home.scss';
 import "react-multi-carousel/lib/styles.css";
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { featureMovies } from "../../dummy-data";
+import { categoryMovies, featureMovies } from "../../dummy-data";
 
 function Home() {
+
+    const categories = useSelector(state => state.movies.categories);
+    console.log(categories);
+
     const [ currentSlide, setCurrentSlide ] = useState(0);
 
     const test = (oldIndex, newIndex) => {
@@ -78,14 +83,16 @@ function Home() {
             </Slider>
         </div>
         <div className="category-section">
-            <p className="category-title">Aventura</p>
-            <CategorySlider></CategorySlider>
-            <p className="category-title">Aventura</p>
-            <CategorySlider></CategorySlider>
-            <p className="category-title">Aventura</p>
-            <CategorySlider></CategorySlider>
-            <p className="category-title">Aventura</p>
-            <CategorySlider></CategorySlider>
+            {
+                categories.map(category => {
+                    return (
+                        <>
+                            <p className="category-title">{category.name}</p>
+                            <CategorySlider movies={category.movies} category={category.name}></CategorySlider>
+                        </>
+                    )
+                })
+            }
         </div>
     </div>
   );

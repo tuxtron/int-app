@@ -1,0 +1,498 @@
+.signup-container {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    width: 100% !important;
+
+    .signup-inputs-section {
+        flex: 1;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-self: flex-start;
+        padding: 5% 5% 0 5%;
+
+        img {
+            width: 120px;
+            height: 35px;
+            margin-bottom: 80px;
+        }
+
+        
+        .step-one-section {
+            width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-self: center;
+
+
+            img {
+                width: 120px;
+                height: 35px;
+                margin-bottom: 120px;
+            }
+            
+            .signup-text {
+                font-style: normal;
+                font-weight: bold;
+                font-size: 30px;
+                line-height: 35px;
+                color: #FFFFFF;
+                margin-bottom: 54px;
+            }
+
+            .input-container {
+                background: rgba(133, 133, 133, 0.5);
+                border-radius: 5px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 22px 30px;
+                margin-bottom: 46px;
+                max-width: 500px;
+
+                input {
+                    width: 100%;
+                    background-color: transparent;
+                    border: none;
+                    outline: none;
+                    font-style: normal;
+                    font-weight: normal;
+                    font-size: 20px;
+                    line-height: 23px;
+                    color: #FFFFFF;
+                }
+            }
+
+            .continue-btn {
+                max-width: 500px;
+                margin-top: 50px;
+                background: rgba(208, 145, 55, 0.5);
+                border-radius: 5px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 20px 0;
+                pointer-events: none;
+
+                &.active {
+                    background: #D09137;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    pointer-events: unset;
+
+                    p {
+                        color: #fff;
+                    }
+                }
+
+                p {
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 20px;
+                    line-height: 23px;
+                    color: rgba(255, 255, 255, 0.5);
+                }
+            }
+        }
+
+        .step-two-section {
+            max-width: 500px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-self: center;
+
+            .greeting-section {
+                margin-bottom: 50px;
+
+                .greeting-text {
+                    font-style: normal;
+                    font-weight: normal;
+                    font-size: 25px;
+                    line-height: 35px;
+                    color: #FFFFFF;
+                }   
+            }
+
+            .package {
+                display: flex;
+                width: 500px;
+                background: rgba(122, 122, 122, 0.2);
+                border: 1px solid #5B5B5B;
+                box-sizing: border-box;
+                backdrop-filter: blur(10px);
+                border-radius: 5px;
+                padding: 30px;
+                margin-bottom: 30px;
+                cursor: pointer;
+
+                &.selected {
+                    border: 1px solid #D09137;
+                }
+
+                .package-name {
+                    flex: 1;
+                    align-self: center;
+                    height: 46px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    
+                    .border {
+                        border-left: 3px solid rgba(255, 177, 65, 0.8);
+                        p {
+                            font-style: normal;
+                            font-weight: 600;
+                            font-size: 20px;
+                            line-height: 23px;
+                            color: #FFFFFF;
+                            margin-left: 7px;
+                        }
+                    }
+                }
+
+                .package-info {
+                    flex: 1.2;
+                    display: flex;
+                    flex-direction: column;
+
+                    p {
+                        font-style: normal;
+                        font-weight: normal;
+                        font-size: 18px;
+                        line-height: 21px;
+                        letter-spacing: 0.5px;
+                        color: #FFFFFF;
+                        margin-bottom: 10px;
+
+                        &:last-of-type {
+                            margin-bottom: 0px;
+                        }
+                    }
+
+                    .package-price {
+                        text-decoration: underline;
+                        margin-bottom: 15px;
+                    }
+                }
+            }
+
+            .package-btn {
+                max-width: 500px;
+                margin-top: 20px;
+                background: rgba(208, 145, 55, 0.5);
+                border-radius: 5px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 20px 0;
+                pointer-events: none;
+
+                &.active {
+                    background: #D09137;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    pointer-events: unset;
+
+                    p {
+                        color: #fff;
+                    }
+                }
+
+                p {
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 20px;
+                    line-height: 23px;
+                    color: rgba(255, 255, 255, 0.5);
+                }
+            }
+        }
+
+        .step-three-section {
+            max-width: 500px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-self: center;
+
+            .credit-card {
+
+                .card__front {
+                    //background: linear-gradient(to left, #70257b, #8a2c94);
+                    background-color: #4d4855;
+                    background-image: linear-gradient(147deg, #000000 0%, #4d4855 55%, #000000 74%);                
+                    border-radius: 10px;
+                    display: block;
+                    height: 195px;
+                    letter-spacing: .1rem;
+                    margin: 0px auto;
+                    position: relative;
+                    text-align: left;
+                    text-transform: uppercase;
+                    width: 325px;
+                }
+    
+                .card-company {
+                    width: 60px;
+                    height: 30px;
+                    position: absolute;
+                    top: 20px;
+                    right: 20px;
+
+                    &.visa {
+                        height: 60px;
+                        top: 10px;
+                    }
+                    
+                }
+    
+                .chip {
+                    background: #efb77f;
+                    border-radius: 5px;
+                    display: block;
+                    height: 30px;
+                    left: 30px;
+                    position: absolute;
+                    top: 50px;
+                    width: 40px;
+                }
+    
+                .cc-number {
+                    background: linear-gradient(#eee, #999);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    bottom: 75px;
+                    font-size: 20px;
+                    letter-spacing: 3.5px;
+                    left: 30px;
+                    position: absolute;
+                }
+    
+                .cc-date {
+                    background: linear-gradient(#eee, #999);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    bottom: 40px;
+                    left: 30px;
+                    position: absolute;
+    
+                    &.expedition {
+                        font-size: 12px;
+                        transform: scale(0.7);
+                        bottom: 38px;
+                        left: 25px;
+                    }
+                }
+    
+                .cc-date.expiry {
+                    bottom: 44px;
+                    left: 100px;
+                }
+                .cc-date.expiry:after {
+                    -webkit-text-fill-color: #52185b;
+                    // content: 'Valid thru';
+                    font-size: 8px;
+                    left: -30px;
+                    position: absolute;
+                    text-transform: none;
+                    top: -10px;
+                }
+    
+                .cc-name {
+                    background: linear-gradient(#eee, #999);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    bottom: 15px;
+                    left: 30px;
+                    position: absolute;
+                }
+    
+                /*
+                * Card back
+                */
+    
+                .card__back {
+                    padding: 18px 0;
+                    background-color: #4d4855;
+                    background-image: linear-gradient(147deg, #000000 0%, #4d4855 55%, #000000 74%);                        
+                    border-radius: 10px;
+                    display: block;
+                    height: 195px;
+                    letter-spacing: .1rem;
+                    margin: 0px auto;
+                    position: relative;
+                    text-align: left;
+                    text-transform: uppercase;
+                    width: 325px;
+                }
+                
+                .card__black-line {
+                    margin-top: 5px;
+                    height: 38px;
+                    background-color: #303030;
+                }
+    
+                .card__back-content {
+                    padding: 15px 15px 0;
+                }
+                .card__secret--last {
+                    color: #303030;
+                    text-align: right;
+                    margin: 0;
+                    font-size: 14px;
+                }
+                
+                .card__secret {
+                    padding: 5px 12px;
+                    background-color: #fff;
+                    position:relative;
+                }
+                
+                .card__secret:before{
+                    content:'';
+                    position: absolute;
+                    top: -3px;
+                    left: -3px;
+                    height: calc(100% + 6px);
+                    width: calc(100% - 42px);
+                    border-radius: 4px;
+                    background: repeating-linear-gradient(45deg, #ededed, #ededed 5px, #f9f9f9 5px, #f9f9f9 10px);
+                }
+    
+            }
+
+            .credit-card-info {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                width: 500px;
+                margin-top: 40px;
+
+                .row {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 20px;
+                }
+
+                .input-container {
+                    background: rgba(133, 133, 133, 0.5);
+                    border-radius: 5px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 22px 30px;
+                    max-width: 500px;
+    
+                    input {
+                        width: 100%;
+                        background-color: transparent;
+                        border: none;
+                        outline: none;
+                        font-style: normal;
+                        font-weight: normal;
+                        font-size: 20px;
+                        line-height: 23px;
+                        color: #FFFFFF;
+                    }
+                }
+
+            }
+
+            .confirm-payment-btn {
+                max-width: 500px;
+                margin-top: 20px;
+                background: rgba(208, 145, 55, 0.5);
+                border-radius: 5px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 20px 0;
+                pointer-events: none;
+
+                &.active {
+                    background: #D09137;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    pointer-events: unset;
+
+                    p {
+                        color: #fff;
+                    }
+                }
+
+                p {
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 20px;
+                    line-height: 23px;
+                    color: rgba(255, 255, 255, 0.5);
+                }
+            }
+
+            
+        }
+
+        .step-four-section {
+            display: flex;
+            flex-direction: column;
+            align-self: center;
+
+            .success-text {
+                text-align: center;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 25px;
+                line-height: 35px;
+                color: #FFFFFF;
+
+                .notflix {
+                    border-bottom: 2px solid #D09238;
+                }
+            }
+
+            .success-img {
+                margin-top: 20%;
+                width: 100%;
+                height: 250px;
+            }
+
+            .login-btn {
+                max-width: 500px;
+                margin-top: 20px;
+                background: #D09137;
+                cursor: pointer;
+                border-radius: 5px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 20px 0;
+
+                p {
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 20px;
+                    line-height: 23px;
+                    color: #fff;
+                }
+            }
+        }
+    }
+
+    .image-container {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        overflow: hidden;
+
+        img {
+            flex: 1;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+}
