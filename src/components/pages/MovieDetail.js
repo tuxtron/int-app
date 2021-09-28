@@ -20,7 +20,7 @@ function MovieDetail(props) {
   return (
 
     <div className="detail-container">
-      <Link to="/Home" className="detail-link">
+      <Link to="/home" className="detail-link">
       <div className="detail-button">
         <img src={arrowimage} alt="arrow"/>
         <p className="detail-back-button-text">
