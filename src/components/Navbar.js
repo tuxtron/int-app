@@ -139,12 +139,12 @@ function Navbar() {
                                     </li>
                             ) : null
                         }
-                    </ul>
-                    {
+                        {
                         location.pathname === '/' || location.pathname === '/login' ? (
-                            <Button buttonStyle='btn--outline'>Registrarte</Button>
-                        ) : null
-                    }
+                            <li className='nav-item button-item'><Button buttonStyle='btn--outline'>Registrarte</Button></li>
+                            ) : null
+                        }
+                        </ul>
                     </div>
                 </nav>
             ) : null
