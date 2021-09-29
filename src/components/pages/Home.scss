@@ -132,3 +132,31 @@
 }
 
 /* ------------ CUSTOM SLICKER ENDS ------------ */
+
+
+
+@media only screen and (max-width: 600px) {
+    .login-container{
+        width:350px;
+    }
+    .email-box{
+        width: 90%;
+    }
+    .contraseña-box{
+        width: 90%;
+    }
+    .sesion-section{
+        width: 90%;
+    }
+}
+
+.row{
+    width: 100%;
+}
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}

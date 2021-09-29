@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Login.css';
 import { Link, useLocation } from 'react-router-dom';
+import { Container, Row, Col } from "react-bootstrap";
 
 
 function Login(props) {
@@ -10,7 +11,6 @@ function Login(props) {
     const [ isSignUpPage, setIsSignUpPage ] = useState(signUpPage);
 
   return (
-
     <div className="login-block">
       <div className= "login-container">
         <p className="iniciar-sesion">{ isSignUpPage ? 'Registrarte' : 'Iniciar Sesión' }</p>

@@ -3,6 +3,7 @@ import "../App.css";
 import { Button } from "./Button";
 import "./HeroSection.css";
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa";
+import { Container, Row, Col } from "react-bootstrap";
 
 const videos = [
   {
@@ -37,6 +38,7 @@ function HeroSection() {
 
   return (
     <div className="hero-container">
+      <Row>
       <section className="slider">
         <FaArrowAltCircleLeft className="left-arrow" onClick={prevSlide} />
         <FaArrowAltCircleRight className="right-arrow" onClick={nextSlide} />
@@ -49,7 +51,9 @@ function HeroSection() {
             </>
           );
         })}
-        <h1>LA AVENTURA TE ESPERA</h1>
+        <Col md={12} lg={12}>
+          <h1 className="text-center">LA AVENTURA TE ESPERA</h1>
+        </Col>
         <p>¿Qué estás esperando?</p>
         <div className="hero-btns">
           <Button
@@ -69,6 +73,7 @@ function HeroSection() {
           </Button>
         </div>
       </section>
+      </Row>
     </div>
   );
 }

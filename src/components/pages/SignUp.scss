@@ -496,3 +496,13 @@
         }
     }
 }
+
+@media only screen and (max-width: 600px) {
+   .signup-container .signup-inputs-section .step-one-section{
+        width:350px;
+   }
+   .image-container{
+       display: none !important;
+   }
+}
+
