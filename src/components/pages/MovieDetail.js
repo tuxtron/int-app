@@ -9,11 +9,15 @@ function MovieDetail(props) {
 
     let movie = props.location.movie;
     const categories = useSelector(state => state.movies.categories);
+    const featureMovies = useSelector(state => state.movies.featureMovies);
     let { category, movieName } = useParams();
 
     if (!movie) {
-        movie = categories.filter(c => c.name === category)[0].movies.filter(m => m.movie.title === movieName)[0].movie;
-
+        if (category !== 'feature') {
+            movie = categories.filter(c => c.name === category)[0].movies.filter(m => m.movie.title === movieName)[0].movie;
+        } else {
+            movie = featureMovies.filter(m => m.title === movieName)[0];
+        }
     }
 
 
@@ -31,7 +35,7 @@ function MovieDetail(props) {
       <div 
         className="detail-card" 
         style={{ 
-            background: `linear-gradient(180deg, rgba(0, 0, 0, 0.26) 0%, rgba(0, 0, 0, 0.99) 100%), url(${movie.image})`, 
+            background: `linear-gradient(180deg, rgba(0, 0, 0, 0.26) 0%, rgba(0, 0, 0, 0.99) 100%), url(${movie.image ? movie.image : movie.imageCover})`, 
             backgroundSize: 'contain',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center'

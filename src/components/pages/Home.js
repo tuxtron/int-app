@@ -6,12 +6,12 @@ import "react-multi-carousel/lib/styles.css";
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { categoryMovies, featureMovies } from "../../dummy-data";
+// import { categoryMovies, featureMovies } from "../../dummy-data";
 
 function Home() {
 
     const categories = useSelector(state => state.movies.categories);
-    console.log(categories);
+    const featureMovies = useSelector(state => state.movies.featureMovies);
 
     const [ currentSlide, setCurrentSlide ] = useState(0);
 
@@ -72,9 +72,10 @@ function Home() {
                 {
                     featureMovies.map((movie, index) => {
                         return (
-                          <Link to='/detail'>
+                          <Link to={'/detail/feature/' + movie.title}>
                             <div className={index === currentSlide ? 'active-feature-card' : 'blur-feature-card'}>
-                                <img className="feature-img" src={movie.url} alt="movie" />
+                                {/* <img className="feature-img" src={movie.url} alt="movie" /> */}
+                                <img className="feature-img" src={movie.imageCover} alt="movie" />
                             </div>
                         </Link>     
                         )

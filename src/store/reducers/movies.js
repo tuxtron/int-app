@@ -1,4 +1,81 @@
 const initialState = {
+    featureMovies: [
+        {
+            "_id": "6140dd7db50723b434c74198",
+            "title": "A title 1",
+            "duration": "120",
+            "value": "8",
+            "description": "A description",
+            "minAge": "18+",
+            "launch": "2021-09-14T00:00:00.000Z",
+            "imageCover": "https://images.alphacoders.com/822/822222.jpg",
+            "imageMobile": "",
+            "movieUrl": "https://es.vid.web.acsta.net/nmedia/34/19/06/03/14//19562331_hd_013.mp4",
+            "director": "A director",
+            "producer": "A producer",
+            "__v": 0
+        },
+        {
+            "_id": "61420cf6fb9af077be23359c",
+            "title": "A title 2",
+            "duration": "120",
+            "value": "8",
+            "description": "A description",
+            "minAge": "12+",
+            "launch": "2021-09-15T15:10:39.685Z",
+            "imageCover": "https://images.alphacoders.com/822/822222.jpg",
+            "imageMobile": "https://images.alphacoders.com/822/822222.jpg",
+            "movieUrl": "https://es.vid.web.acsta.net/nmedia/34/19/06/03/14//19562331_hd_013.mp4",
+            "director": "A director",
+            "producer": "A producer",
+            "__v": 0
+        },
+        {
+            "_id": "61420cfefb9af077be23359f",
+            "title": "A title 3",
+            "duration": "120",
+            "value": "8",
+            "description": "A description",
+            "minAge": "10+",
+            "launch": "2021-09-15T15:10:48.260Z",
+            "imageCover": "https://images.alphacoders.com/822/822222.jpg",
+            "imageMobile": "https://images.alphacoders.com/822/822222.jpg",
+            "movieUrl": "https://es.vid.web.acsta.net/nmedia/34/19/06/03/14//19562331_hd_013.mp4",
+            "director": "A director",
+            "producer": "A producer",
+            "__v": 0
+        },
+        {
+            "_id": "61420d34fb9af077be2335a6",
+            "title": "A title 4",
+            "duration": "120",
+            "value": "8",
+            "description": "A description",
+            "minAge": "5+",
+            "launch": "2021-09-15T15:11:32.511Z",
+            "imageCover": "https://images.alphacoders.com/822/822222.jpg",
+            "imageMobile": "https://images.alphacoders.com/822/822222.jpg",
+            "movieUrl": "https://es.vid.web.acsta.net/nmedia/34/19/06/03/14//19562331_hd_013.mp4",
+            "director": "A director",
+            "producer": "A producer",
+            "__v": 0
+        },
+        {
+            "_id": "614e670cad170641a41840f4",
+            "title": "A title 5",
+            "duration": "120",
+            "value": "8",
+            "description": "A description",
+            "minAge": "16+",
+            "launch": "1999-07-14T00:00:00.000Z",
+            "imageCover": "https://images.alphacoders.com/822/822222.jpg",
+            "imageMobile": "https://images.alphacoders.com/822/822222.jpg",
+            "movieUrl": "https://es.vid.web.acsta.net/nmedia/34/19/06/03/14//19562331_hd_013.mp4",
+            "director": "A director",
+            "producer": "A producer",
+            "__v": 0
+        }
+    ],
     categories: [
         {
             "_id": "randomid",

@@ -8,10 +8,15 @@ function Player(props) {
 
     let movieUrl = props.location.movieUrl;
     const categories = useSelector(state => state.movies.categories);
+    const featureMovies = useSelector(state => state.movies.featureMovies);
     let { category, movieName } = useParams();
 
     if (!movieUrl) {
-        movieUrl = categories.filter(c => c.name === category)[0].movies.filter(m => m.movie.title === movieName)[0].movie.movieUrl;
+        if ( category !== 'feature' ) {
+            movieUrl = categories.filter(c => c.name === category)[0].movies.filter(m => m.movie.title === movieName)[0].movie.movieUrl;
+        } else {
+            movieUrl = featureMovies.filter(m => m.title === movieName)[0].movieUrl;
+        }
     }
 
   return (

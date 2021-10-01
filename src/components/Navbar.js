@@ -119,10 +119,10 @@ function Navbar() {
                                     <div className={ showMenu ? 'menu-content' : 'menu-content hide'}>
                                         <div className="triangle"></div>
                                         <div className="user-logo-container">
-                                            <img class="user-icon" src={require('../assets/icons/user.svg')} alt="logo" />
+                                            <img className="user-icon" src={require('../assets/icons/user.svg')} alt="logo" />
                                         </div>
-                                        <p class="menu-name">Usuario</p>
-                                        <p class="menu-email">usuario@gmail.com</p>
+                                        <p className="menu-name">Usuario</p>
+                                        <p className="menu-email">usuario@gmail.com</p>
                                         <div className="self-managment-btn" onClick={openSelfManagmentWindow}>
                                             <p>Autogestión</p>
                                         </div>
