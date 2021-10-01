@@ -52,7 +52,7 @@ function HeroSection() {
           );
         })}
         <Col md={12} lg={12}>
-          <h1 className="text-center">LA AVENTURA TE ESPERA</h1>
+          <h1 className="text-center landing-title">LA AVENTURA TE ESPERA</h1>
         </Col>
         <p>¿Qué estás esperando?</p>
         <div className="hero-btns">
@@ -63,14 +63,14 @@ function HeroSection() {
           >
             SUSCRIBITE
           </Button>
-          <Button
+          {/* <Button
             className="btns"
             buttonStyle="btn--primary"
             buttonSize="btn--large"
             onClick={console.log("hey")}
           >
             VER TRAILER <i className="far fa-play-circle" />
-          </Button>
+          </Button> */}
         </div>
       </section>
       </Row>
