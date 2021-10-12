@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Slider from "react-slick";
 import CategorySlider from '../CategorySlider';
 import './Home.scss';
 import "react-multi-carousel/lib/styles.css";
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import * as authActions from '../../store/actions/auth';
 
 // import { categoryMovies, featureMovies } from "../../dummy-data";
 
@@ -62,8 +63,6 @@ function Home() {
             }
           ]
     };
-
-
 
   return (
     <div className="container">

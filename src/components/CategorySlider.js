@@ -9,7 +9,7 @@ import { categoryMovies } from '../dummy-data';
 
 function CategorySlider(props) {
 
-    console.log('MOVIES: ', props.movies);
+    // console.log('MOVIES: ', props.movies);
     const category = props.category;
 
     var settings = {

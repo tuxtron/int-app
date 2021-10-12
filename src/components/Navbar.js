@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from './Button';
-import { Link, useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { Link, useLocation, useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import * as authActions from '../store/actions/auth';
 import searchIcon from '../assets/icons/search.svg';
 import './Navbar.scss';
 
 function Navbar() {
 
+    const dispatch = useDispatch();
+    const history = useHistory();
     const location = useLocation();
+    
+    const isUserLogged = useSelector(state => state.auth.isUserLogged);
+    const user = useSelector(state => state.auth.loggedUser);
+    const token = useSelector(state => state.auth.token);
 
     const [ click, setClick ] = useState(false);
     const [ button, setButton ] = useState(true);
@@ -15,7 +22,7 @@ function Navbar() {
     const [ searchText, setSearchText ] = useState('');
 
     const allMovies = useSelector(state => state.movies.allMovies);
-    console.log(allMovies);
+    // console.log(allMovies);
 
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
@@ -30,6 +37,16 @@ function Navbar() {
 
     useEffect(() => {
         showButton();
+        // console.log('isUserLogged: ', isUserLogged);
+        // if (!isUserLogged) {
+        //     const userDataFromLS = JSON.parse(localStorage.getItem('notflixUserDate'));
+        //     const currentTime = new Date().getTime();
+        //     if (userDataFromLS?.exp && userDataFromLS.exp * 1000 > currentTime ) {
+        //         dispatch(authActions.setUserData(userDataFromLS));
+        //     } else {
+        //         history.push('/login');
+        //     }
+        // }
     }, []);
 
     window.addEventListener('resize', showButton);
@@ -77,79 +94,135 @@ function Navbar() {
     }
 
     const openSelfManagmentWindow = () => {
-        window.open('http://facturacion-front.vercel.app/?from=web&token=token');
+        window.open(`http://facturacion-front.vercel.app/?from=web&token=${token}`);
+        setShowMenu(false);
+    }
+
+    const signOutBtnClicked = () => {
+        dispatch(authActions.signOut());
+        setShowMenu(false);
+        history.push('/');
     }
 
   return (
-    <>
-        {   
-            showNavbar() ? (
-                <nav className='navbar'>
-                    <div className='navbar-container'>
-                    <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
-                        <img
-                        style={{ height: 'auto', width: 'auto'}}
-                        alt='Logo'
-                        src="/logo192.png"
-                        />
-                    </Link>
-                    <div className='menu-icon' onClick={handleClick}>
-                        <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
-                    </div>
-                    <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-                        {
-                            location.pathname === '/home' ? (
-                                <div className="search-section">
-                                    <div className="search-box">
-                                        <img className="search-icon" src={searchIcon} alt="search" />
-                                        <input className="search-input" type="text" placeholder="Qué estás buscando?" value={searchText} onChange={(event) => setSearchText(event.target.value)} />
-                                        {
-                                            searchText !== '' ? (
-                                                <div className="search-result-section">
-                                                    { getSearchResults() }
-                                                </div>
-                                            ) : null
-                                        }
-                                    </div>
-                                    <div className={ showMenu ? 'button-menu active' : 'button-menu'} onClick={toggleMenu}>
-                                        <span className="top"></span>
-                                        <span className="mid"></span>
-                                        <span className="bot"></span>
-                                    </div>
-                                    <div className={ showMenu ? 'menu-content' : 'menu-content hide'}>
-                                        <div className="triangle"></div>
-                                        <div className="user-logo-container">
-                                            <img className="user-icon" src={require('../assets/icons/user.svg')} alt="logo" />
-                                        </div>
-                                        <p className="menu-name">Usuario</p>
-                                        <p className="menu-email">usuario@gmail.com</p>
-                                        <div className="self-managment-btn" onClick={openSelfManagmentWindow}>
-                                            <p>Autogestión</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            ) : null
-                        }
-                        {
-                            location.pathname === '/' || location.pathname === '/sign-up' ? (
-                                <li className='nav-item'>
-                                    <Link to='/login' className='nav-links' onClick={closeMobileMenu}>
-                                        Iniciar Sesión
-                                    </Link>
-                                    </li>
-                            ) : null
-                        }
-                        {
-                        location.pathname === '/' || location.pathname === '/login' ? (
-                            <li className='nav-item button-item'><Button buttonStyle='btn--outline'>Registrarte</Button></li>
-                            ) : null
-                        }
-                        </ul>
-                    </div>
-                </nav>
-            ) : null
-    }
-    </>
+      <>
+          {showNavbar() ? (
+              <nav className="navbar">
+                  <div className="navbar-container">
+                      <Link
+                          to="/"
+                          className="navbar-logo"
+                          onClick={closeMobileMenu}
+                      >
+                          <img
+                              style={{ height: "auto", width: "auto" }}
+                              alt="Logo"
+                              src="/logo192.png"
+                          />
+                      </Link>
+                      <div className="menu-icon" onClick={handleClick}>
+                          <i
+                              className={click ? "fas fa-times" : "fas fa-bars"}
+                          />
+                      </div>
+                      <ul className={click ? "nav-menu active" : "nav-menu"}>
+                          {location.pathname === "/home" ? (
+                              <div className="search-section">
+                                  <div className="search-box">
+                                      <img
+                                          className="search-icon"
+                                          src={searchIcon}
+                                          alt="search"
+                                      />
+                                      <input
+                                          className="search-input"
+                                          type="text"
+                                          placeholder="Qué estás buscando?"
+                                          value={searchText}
+                                          onChange={(event) =>
+                                              setSearchText(event.target.value)
+                                          }
+                                      />
+                                      {searchText !== "" ? (
+                                          <div className="search-result-section">
+                                              {getSearchResults()}
+                                          </div>
+                                      ) : null}
+                                  </div>
+                                  <div
+                                      className={
+                                          showMenu
+                                              ? "button-menu active"
+                                              : "button-menu"
+                                      }
+                                      onClick={toggleMenu}
+                                  >
+                                      <span className="top"></span>
+                                      <span className="mid"></span>
+                                      <span className="bot"></span>
+                                  </div>
+                                  <div
+                                      className={
+                                          showMenu
+                                              ? "menu-content"
+                                              : "menu-content hide"
+                                      }
+                                  >
+                                      <div className="triangle"></div>
+                                      <div className="user-logo-container">
+                                          <img
+                                              className="user-icon"
+                                              src={require("../assets/icons/user.svg")}
+                                              alt="logo"
+                                          />
+                                      </div>
+                                      <p className="menu-name">
+                                          {user.name + " " + user.last_name}
+                                      </p>
+                                      <p className="menu-email">{user.email}</p>
+                                      <div
+                                          className="self-managment-btn"
+                                          onClick={openSelfManagmentWindow}
+                                      >
+                                          <p>Autogestión</p>
+                                      </div>
+                                      <div
+                                          className="sign-out-btn"
+                                          onClick={signOutBtnClicked}
+                                      >
+                                          <p>Cerrar sesión</p>
+                                      </div>
+                                  </div>
+                              </div>
+                          ) : null}
+                          {location.pathname === "/" ||
+                          location.pathname === "/sign-up" ? (
+                              <li className="nav-item">
+                                  <Link
+                                      to={isUserLogged ? "/home" : "/login"}
+                                      className="nav-links"
+                                      onClick={closeMobileMenu}
+                                  >
+                                      {isUserLogged
+                                          ? "Ingresar"
+                                          : "Iniciar Sesión"}
+                                  </Link>
+                              </li>
+                          ) : null}
+                          {(location.pathname === "/" ||
+                              location.pathname === "/login") &&
+                          !isUserLogged ? (
+                              <li className="nav-item button-item">
+                                  <Button buttonStyle="btn--outline">
+                                      Registrarte
+                                  </Button>
+                              </li>
+                          ) : null}
+                      </ul>
+                  </div>
+              </nav>
+          ) : null}
+      </>
   );
 }
 
