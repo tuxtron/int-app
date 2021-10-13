@@ -44,7 +44,14 @@ function Login(props) {
               </div>
               {isSignUpPage ? (
                   <>
-                      <Link to="/sign-up" className="sesion-section">
+                      <Link
+                          to={{
+                              pathname: "/sign-up",
+                              email: user,
+                              password,
+                          }}
+                          className="sesion-section"
+                      >
                           <p className="link-registar">Comenzá!</p>
                       </Link>
                       <p className="registarte">
@@ -61,7 +68,7 @@ function Login(props) {
               ) : (
                   <>
                       <div onClick={login} className="sesion-section">
-                      {/* <Link to="/home" className="sesion-section"> */}
+                          {/* <Link to="/home" className="sesion-section"> */}
                           <p className="link-registar"> Iniciar Sesión </p>
                       </div>
                       <p className="registarte">

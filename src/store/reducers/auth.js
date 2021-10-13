@@ -5,21 +5,21 @@ import {
 } from '../actions/auth';
 
 const initialState = {
-    loggedUser: {
-        admin: false,
-        email: "chyao@test.com",
-        exp: 1634104548,
-        iat: 1634018148,
-        last_name: "Yao",
-        name: "Kevin",
-        tenant: "web",
-        __v: 0,
-        _id: "6164fe623384a5f22662f216",
-    },
-    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTY0ZmU2MjMzODRhNWYyMjY2MmYyMTYiLCJlbWFpbCI6ImNoeWFvQHRlc3QuY29tIiwidGVuYW50Ijoid2ViIiwibmFtZSI6IktldmluIiwibGFzdF9uYW1lIjoiWWFvIiwiYWRtaW4iOmZhbHNlLCJfX3YiOjAsImlhdCI6MTYzNDAwODcyNCwiZXhwIjoxNjM0MDk1MTI0fQ.p3lxEE5HLDjxltKNnRIuQ5czQtzP0fgEcptvzR0lENM',
-    isUserLogged: true,
-    // loggedUser: {},
-    // isUserLogged: false,
+    // loggedUser: {
+    //     admin: false,
+    //     email: "chyao@test.com",
+    //     exp: 1634104548,
+    //     iat: 1634018148,
+    //     last_name: "Yao",
+    //     name: "Kevin",
+    //     tenant: "web",
+    //     __v: 0,
+    //     _id: "6164fe623384a5f22662f216",
+    // },
+    // token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTY0ZmU2MjMzODRhNWYyMjY2MmYyMTYiLCJlbWFpbCI6ImNoeWFvQHRlc3QuY29tIiwidGVuYW50Ijoid2ViIiwibmFtZSI6IktldmluIiwibGFzdF9uYW1lIjoiWWFvIiwiYWRtaW4iOmZhbHNlLCJfX3YiOjAsImlhdCI6MTYzNDAwODcyNCwiZXhwIjoxNjM0MDk1MTI0fQ.p3lxEE5HLDjxltKNnRIuQ5czQtzP0fgEcptvzR0lENM',
+    // isUserLogged: true,
+    loggedUser: {},
+    isUserLogged: false,
 }
 
 const authReducer = ( state = initialState, action ) => {

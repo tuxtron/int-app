@@ -63,7 +63,8 @@ export const signOut = () => {
     }
 }
 
-export const signUp = (email, password, name, last_name, history) => {
+export const signUp = (email, password, name, last_name, nextStep) => {
+    console.log({email, password, name, last_name});
     return async dispatch => {
         await axios.post(SSO_BASE_API_URL + 'register', {
             email,
@@ -74,11 +75,11 @@ export const signUp = (email, password, name, last_name, history) => {
             admin: false
         })
         .then( res => {
-            if (res.status === 200) {
+            if (res.status === 201) {
                 console.log( 'ÉXITO: SSO-API /register' ); 
                 console.log( 'Resultado del register: \n', res.data);
 
-                history.push('/login');
+                nextStep(4);
             }
         })
         .catch( err => {

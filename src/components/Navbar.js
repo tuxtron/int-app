@@ -94,7 +94,7 @@ function Navbar() {
     }
 
     const openSelfManagmentWindow = () => {
-        window.open(`http://facturacion-front.vercel.app/?from=web&token=${token}`);
+        window.open(`https://facturacion-front.vercel.app/?from=web&token=${token}`);
         setShowMenu(false);
     }
 

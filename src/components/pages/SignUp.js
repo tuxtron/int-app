@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
+import * as authActions from '../../store/actions/auth';
+import * as packageActions from '../../store/actions/package';
 import './SignUp.scss';
 
 import background from '../../assets/images/signup-bg.png';
@@ -9,9 +12,14 @@ import { packages } from '../../dummy-data';
 import InputMask from 'react-input-mask';
 import ReactCardFlip from 'react-card-flip';
 
-export default function SignUp() {
+export default function SignUp(props) {
 
-    let history = useHistory();
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const allAvailablePackages = useSelector(state => state.package.allAvailablePackages);
+
+    let email = props.location.email;
+    let password = props.location.password;
 
     const [ step, setStep ] = useState(1);
 
@@ -31,6 +39,10 @@ export default function SignUp() {
     const [ name, setName ] = useState('Nombre completo');
     const [ expiredDate, setExpiredDate ] = useState('**/**');
     const [ securityCode, setSecurityCode ] = useState('***');
+
+    useEffect(() => {
+        dispatch(packageActions.getAllPackages());
+    }, []);
     
     const checkConfirmBtnAvailable = () => {
         if (nameInput !== '' && firsNameInput !== '' && birthdayInput !== '' && !birthdayInput.includes('_')) {
@@ -116,6 +128,18 @@ export default function SignUp() {
         }
         return false;
     }
+
+    const confirmedBtnClicked = () => {
+        dispatch(
+            authActions.signUp(
+                email,
+                password,
+                nameInput,
+                firsNameInput,
+                setStep
+            )
+        );
+    }
     
 
   return (
@@ -152,7 +176,7 @@ export default function SignUp() {
                               value={birthdayInput}
                               onChange={(event) => {
                                   setBirthdayInput(event.target.value);
-                                  console.log(birthdayInput);
+                                //   console.log(birthdayInput);
                               }}
                           ></InputMask>
                       </div>
@@ -171,41 +195,41 @@ export default function SignUp() {
               {step === 2 ? (
                   <div className="step-two-section">
                       <div className="greeting-section">
-                          <p class="greeting-text">Hola {nameInput} 👋🏻</p>
-                          <p class="greeting-text">
+                          <p className="greeting-text">Hola {nameInput} 👋🏻</p>
+                          <p className="greeting-text">
                               Elegí un paquete para avanzar!
                           </p>
                       </div>
-                      {packages.map((p, index) => {
-                          return (
-                              <div
-                                  className={
-                                      selectedPackage === index
-                                          ? "package selected"
-                                          : "package"
-                                  }
-                                  key={index}
-                                  onClick={() => setSelectedPackage(index)}
-                              >
-                                  <div className="package-name">
-                                      <div className="border">
-                                          <p>Paquete</p>
-                                          <p>{p.name}</p>
-                                      </div>
-                                  </div>
-                                  <div className="package-info">
-                                      <p className="package-price">
-                                          Por ${p.price} podés
-                                      </p>
-                                      {p.features.map((f) => (
-                                          <p className="package-feature">
-                                              - {f}
-                                          </p>
-                                      ))}
-                                  </div>
-                              </div>
-                          );
-                      })}
+                      <div className="package-section">
+                        {allAvailablePackages.map((p, index) => {
+                            return (
+                                <div
+                                    className={
+                                        selectedPackage === index
+                                            ? "package selected"
+                                            : "package"
+                                    }
+                                    key={index}
+                                    onClick={() => setSelectedPackage(index)}
+                                >
+                                    <div className="package-name">
+                                        <div className="border">
+                                            <p>Paquete</p>
+                                            <p>{p.nombre}</p>
+                                        </div>
+                                    </div>
+                                    <div className="package-info">
+                                        <p className="package-price">
+                                            Por ${p.precio} tenés
+                                        </p>
+                                        <p className="package-feature">
+                                            - {p.descripcion}
+                                        </p>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                      </div>
                       <div
                           className={
                               checkPackageBtnAvailable()
@@ -227,41 +251,45 @@ export default function SignUp() {
                       >
                           <div class="card__front">
                               <span class="chip"></span>
-                              {
-                                  ccNumberInput.length !== 0 && ccNumberInput[0] === '4' ? (
-                                    <img
-                                        class="card-company visa"
-                                        src={require('../../assets/images/visa.png')}
-                                        alt="card_logo"
-                                    />
-                                  ) : null
-                              }
-                                                            {
-                                  ccNumberInput.length !== 0 && ccNumberInput[0] === '5' ? (
-                                    <img
-                                        class="card-company"
-                                        src={require('../../assets/images/mastercard.png')}
-                                        alt="card_logo"
-                                    />
-                                  ) : null
-                              }
-                                                            {
-                                  ccNumberInput.length !== 0 && ccNumberInput[0] === '3' ? (
-                                    <img
-                                        class="card-company"
-                                        src={require('../../assets/images/amex.png')}
-                                        alt="card_logo"
-                                    />
-                                  ) : null
-                              }
+                              {ccNumberInput.length !== 0 &&
+                              ccNumberInput[0] === "4" ? (
+                                  <img
+                                      class="card-company visa"
+                                      src={require("../../assets/images/visa.png")}
+                                      alt="card_logo"
+                                  />
+                              ) : null}
+                              {ccNumberInput.length !== 0 &&
+                              ccNumberInput[0] === "5" ? (
+                                  <img
+                                      class="card-company"
+                                      src={require("../../assets/images/mastercard.png")}
+                                      alt="card_logo"
+                                  />
+                              ) : null}
+                              {ccNumberInput.length !== 0 &&
+                              ccNumberInput[0] === "3" ? (
+                                  <img
+                                      class="card-company"
+                                      src={require("../../assets/images/amex.png")}
+                                      alt="card_logo"
+                                  />
+                              ) : null}
                               <span class="cc-number">
-                                  {
-                                       ccNumberInput.length !== 0 && ccNumberInput[0] === '3' ? (
-                                            cardNumber.slice(0, 4)+' '+cardNumber.slice(4, 10)+' '+cardNumber.slice(-5)
-                                        ) : (
-                                            cardNumber.slice(0, 4)+' '+cardNumber.slice(4, 8)+' '+cardNumber.slice(8, 12)+' '+cardNumber.slice(-4)
-                                        )
-                                  }
+                                  {ccNumberInput.length !== 0 &&
+                                  ccNumberInput[0] === "3"
+                                      ? cardNumber.slice(0, 4) +
+                                        " " +
+                                        cardNumber.slice(4, 10) +
+                                        " " +
+                                        cardNumber.slice(-5)
+                                      : cardNumber.slice(0, 4) +
+                                        " " +
+                                        cardNumber.slice(4, 8) +
+                                        " " +
+                                        cardNumber.slice(8, 12) +
+                                        " " +
+                                        cardNumber.slice(-4)}
                               </span>
                               <span class="cc-date expedition">
                                   Valido <br></br> hasta
@@ -288,7 +316,7 @@ export default function SignUp() {
                                   placeholder="Nombre y apellido"
                                   value={ccNameInput}
                                   onChange={(event) =>
-                                    handleCcNameChange(event.target.value)
+                                      handleCcNameChange(event.target.value)
                                   }
                                   onFocus={() => setCreditCardFlipped(false)}
                               />
@@ -299,10 +327,10 @@ export default function SignUp() {
                                   placeholder="Número de tarjeta"
                                   value={ccNumberInput}
                                   onChange={(event) =>
-                                    handleCcNumberChange(event.target.value)
+                                      handleCcNumberChange(event.target.value)
                                   }
                                   onFocus={() => setCreditCardFlipped(false)}
-                                  maxLength={ccNumberInput[0] === '3' ? 15 : 16}
+                                  maxLength={ccNumberInput[0] === "3" ? 15 : 16}
                               />
                           </div>
                           <div className="row">
@@ -311,8 +339,14 @@ export default function SignUp() {
                                       type="text"
                                       placeholder="Vencimiento"
                                       value={ccExpiredDateInput}
-                                      onChange={(event) => handleExpiredDateChange(event.target.value)}
-                                      onFocus={() => setCreditCardFlipped(false)}
+                                      onChange={(event) =>
+                                          handleExpiredDateChange(
+                                              event.target.value
+                                          )
+                                      }
+                                      onFocus={() =>
+                                          setCreditCardFlipped(false)
+                                      }
                                   />
                               </div>
                               <div className="input-container">
@@ -320,8 +354,14 @@ export default function SignUp() {
                                       type="text"
                                       placeholder="Cod. Seguridad"
                                       value={ccSecurityCodeInput}
-                                      onChange={(event) => handleSecurityCodeChange(event.target.value)}
-                                      maxLength={ccNumberInput[0] === '3' ? 4 : 3}
+                                      onChange={(event) =>
+                                          handleSecurityCodeChange(
+                                              event.target.value
+                                          )
+                                      }
+                                      maxLength={
+                                          ccNumberInput[0] === "3" ? 4 : 3
+                                      }
                                       onFocus={() => setCreditCardFlipped(true)}
                                   />
                               </div>
@@ -330,27 +370,32 @@ export default function SignUp() {
 
                       <div
                           className={
-                                checkConfirmPaymentBtnAvailable()
+                              checkConfirmPaymentBtnAvailable()
                                   ? "confirm-payment-btn active"
                                   : "confirm-payment-btn"
                           }
-                          onClick={() => setStep(4)}
+                          onClick={confirmedBtnClicked}
                       >
                           <p>Confirmar</p>
                       </div>
                   </div>
               ) : null}
-              {
-                  step === 4 ? (
-                    <div className="step-four-section">
-                        <p class="success-text">¡Listo! <br></br> Ya podés empezar a disfrutar <span className="notflix">NotFlix</span></p>
-                        <img class="success-img" src={require('../../assets/images/success.svg')} alt="success" />
-                        <div className="login-btn" onClick={() => goToLogin()}>
-                            <p>Iniciar sesión</p>
-                        </div>
-                    </div>
-                  ) : null
-              }
+              {step === 4 ? (
+                  <div className="step-four-section">
+                      <p class="success-text">
+                          ¡Listo! <br></br> Ya podés empezar a disfrutar{" "}
+                          <span className="notflix">NotFlix</span>
+                      </p>
+                      <img
+                          class="success-img"
+                          src={require("../../assets/images/success.svg")}
+                          alt="success"
+                      />
+                      <div className="login-btn" onClick={() => goToLogin()}>
+                          <p>Iniciar sesión</p>
+                      </div>
+                  </div>
+              ) : null}
           </div>
 
           <div className="image-container">
