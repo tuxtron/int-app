@@ -8,7 +8,7 @@ export const SIGN_OUT = 'SIGN_OUT';
 
 const SSO_BASE_API_URL = 'https://singlesignonbackend.herokuapp.com/api/users/';
 
-export const login = (email, password, history) => {
+export const login = (email, password, history, errorCallback) => {
 
     return async dispatch => {
         await axios.post(SSO_BASE_API_URL + 'login', {
@@ -35,6 +35,7 @@ export const login = (email, password, history) => {
         .catch( err => {
             console.log( 'ERROR: SSO-API /login' );
             console.log( 'Error: ', err );
+            errorCallback();
         })
     }
     // RESPONSE EXAMPLE for login
@@ -63,7 +64,7 @@ export const signOut = () => {
     }
 }
 
-export const signUp = (email, password, name, last_name, nextStep) => {
+export const signUp = (email, password, name, last_name, nextStep, errorCallback) => {
     console.log({email, password, name, last_name});
     return async dispatch => {
         await axios.post(SSO_BASE_API_URL + 'register', {
@@ -85,6 +86,7 @@ export const signUp = (email, password, name, last_name, nextStep) => {
         .catch( err => {
             console.log( 'ERROR: SSO-API /register' );
             console.log( 'Error: ', err );
+            errorCallback();
         })
     }
     // RESPONSE EXAMPLE for register
