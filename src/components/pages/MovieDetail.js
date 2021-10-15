@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 function MovieDetail(props) {
 
     let movie = props.location.movie;
+    console.log(movie);
     const categories = useSelector(state => state.movies.categories);
     const featureMovies = useSelector(state => state.movies.featureMovies);
     let { category, movieName } = useParams();

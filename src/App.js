@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
 import authReducer from './store/reducers/auth';
 import movieReducer from './store/reducers/movies';
+import packageReducer from './store/reducers/package';
 
 import Services from './components/pages/Services';
 import SignIn from './components/pages/SignIn';
@@ -24,6 +25,7 @@ function App() {
     const rootReducer = combineReducers({
         auth: authReducer,
         movies: movieReducer,
+        package: packageReducer,
     });
     
     const store = createStore(rootReducer, applyMiddleware(ReduxThunk))
