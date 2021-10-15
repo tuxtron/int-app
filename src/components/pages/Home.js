@@ -1,11 +1,18 @@
+<<<<<<< HEAD
 import React, { useState, useEffect} from 'react';
+=======
+import React, { useState, useEffect } from 'react';
+>>>>>>> 23e6c1eac9dcd6d28c234b36a6dac6cb6a324878
 import Slider from "react-slick";
 import CategorySlider from '../CategorySlider';
 import './Home.scss';
 import "react-multi-carousel/lib/styles.css";
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+<<<<<<< HEAD
 import {_fetch} from '../../services/appController';
+=======
+>>>>>>> 23e6c1eac9dcd6d28c234b36a6dac6cb6a324878
 import * as authActions from '../../store/actions/auth';
 
 // import { categoryMovies, featureMovies } from "../../dummy-data";
@@ -21,6 +28,7 @@ function Home() {
     setCurrentSlide(newIndex);
   }
 
+<<<<<<< HEAD
   const settings = {
     dots: true,
     infinite: true,
@@ -70,6 +78,8 @@ function Home() {
       //  .then((data) => console.log(data));
   }, []);
 
+=======
+>>>>>>> 23e6c1eac9dcd6d28c234b36a6dac6cb6a324878
   return (
     <div className="container">
       <div className="features-section">
