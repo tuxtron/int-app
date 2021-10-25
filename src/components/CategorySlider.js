@@ -9,7 +9,7 @@ import { categoryMovies } from '../dummy-data';
 
 function CategorySlider(props) {
 
-    // console.log('MOVIES: ', props.movies);
+    console.log('MOVIES: ', props.movies);
     const category = props.category;
 
     var settings = {
@@ -78,7 +78,7 @@ function CategorySlider(props) {
             props.movies.map(m => {
             // categoryMovies.map(m => {
                 return (
-                    <Link 
+                    <Link
                         to={{
                             pathname: `/detail/${category}/${m.movie.title}`,
                             movie: m.movie,

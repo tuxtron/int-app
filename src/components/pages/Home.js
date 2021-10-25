@@ -1,18 +1,11 @@
-<<<<<<< HEAD
 import React, { useState, useEffect} from 'react';
-=======
-import React, { useState, useEffect } from 'react';
->>>>>>> 23e6c1eac9dcd6d28c234b36a6dac6cb6a324878
 import Slider from "react-slick";
 import CategorySlider from '../CategorySlider';
 import './Home.scss';
 import "react-multi-carousel/lib/styles.css";
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-<<<<<<< HEAD
 import {_fetch} from '../../services/appController';
-=======
->>>>>>> 23e6c1eac9dcd6d28c234b36a6dac6cb6a324878
 import * as authActions from '../../store/actions/auth';
 
 // import { categoryMovies, featureMovies } from "../../dummy-data";
@@ -23,12 +16,14 @@ function Home() {
   const featureMovies = useSelector(state => state.movies.featureMovies);
 
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [data, setData] = useState([]);
+  const token = useSelector(state => state.auth.token);
+
 
   const test = (oldIndex, newIndex) => {
     setCurrentSlide(newIndex);
   }
 
-<<<<<<< HEAD
   const settings = {
     dots: true,
     infinite: true,
@@ -73,34 +68,37 @@ function Home() {
     ]
   };
 
-  useEffect(async () => {
-    //await _fetch("https://ia-cms.herokuapp.com/api/v1/public/films", "GET").then((res) => res.json())
-      //  .then((data) => console.log(data));
+  useEffect( () => {
+    async function jose () {
+      await _fetch("https://ia-cms.herokuapp.com/api/v1/public/web", "GET", token).then((res) => res.json())
+        .then((data) => {console.log(data); setData(data)});
+    }
+    jose();
   }, []);
 
-=======
->>>>>>> 23e6c1eac9dcd6d28c234b36a6dac6cb6a324878
   return (
     <div className="container">
       <div className="features-section">
         <Slider {...settings}>
-          {
-            featureMovies.map((movie, index) => {
+          {data.length != 0 ? (
+            data[0].movies.map((movie, index) => {
               return (
-                <Link to={'/detail/feature/' + movie.title}>
+                <Link to={'/detail/feature/' + movie.movie.title}>
                   <div className={index === currentSlide ? 'active-feature-card' : 'blur-feature-card'}>
                     {/* <img className="feature-img" src={movie.url} alt="movie" /> */}
-                    <img className="feature-img" src={movie.imageCover} alt="movie" />
+                    <img className="feature-img" src={movie.movie.imageCover} alt="movie" />
                   </div>
                 </Link>
               )
             })
+          ) :
+          null
           }
         </Slider>
       </div>
       <div className="category-section">
         {
-          categories.map(category => {
+          data.map(category => {
             return (
               <>
                 <p className="category-title">{category.name}</p>

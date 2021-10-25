@@ -1,3 +1,4 @@
+import { InvalidTokenError } from "jwt-decode";
 
 export const loadMovies = async () => {
     fetch("https://ia-cms.herokuapp.com/api/v1/public/films")
@@ -5,16 +6,13 @@ export const loadMovies = async () => {
         .then((data) => console.log(data));
 }
 
-export const _fetch = async function (url, action, body) {
+export const _fetch = async function (url, action, token, body) {
   
   const options = {
     method: action,
     body: body,
     headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      //Authorization: `Bearer ${token}`,
-      'Access-Control-Allow-Origin':'no-cors'
+      'x-access-token': token
     },
   };
   return fetch(url, options);
