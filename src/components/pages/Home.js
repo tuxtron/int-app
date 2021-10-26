@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {_fetch} from '../../services/appController';
 import * as authActions from '../../store/actions/auth';
+import * as moviesActions from '../../store/actions/movies';
 
 // import { categoryMovies, featureMovies } from "../../dummy-data";
 
@@ -18,6 +19,8 @@ function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [data, setData] = useState([]);
   const token = useSelector(state => state.auth.token);
+
+  const dispatch = useDispatch();
 
 
   const test = (oldIndex, newIndex) => {
@@ -74,6 +77,7 @@ function Home() {
         .then((data) => {console.log(data); setData(data)});
     }
     jose();
+    // dispatch(moviesActions.getCmsMovies(token));
   }, []);
 
   return (
