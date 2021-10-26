@@ -1,7 +1,8 @@
 import {
     LOGIN,
     SET_USER,
-    SIGN_OUT
+    SIGN_OUT,
+    SET_TOKEN
 } from '../actions/auth';
 
 const initialState = {
@@ -18,7 +19,8 @@ const initialState = {
     // },
     // token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTY0ZmU2MjMzODRhNWYyMjY2MmYyMTYiLCJlbWFpbCI6ImNoeWFvQHRlc3QuY29tIiwidGVuYW50Ijoid2ViIiwibmFtZSI6IktldmluIiwibGFzdF9uYW1lIjoiWWFvIiwiYWRtaW4iOmZhbHNlLCJfX3YiOjAsImlhdCI6MTYzNDAwODcyNCwiZXhwIjoxNjM0MDk1MTI0fQ.p3lxEE5HLDjxltKNnRIuQ5czQtzP0fgEcptvzR0lENM',
     // isUserLogged: true,
-    loggedUser: {},
+    loggedUser: undefined,
+    token: undefined,
     isUserLogged: false,
 }
 
@@ -43,6 +45,11 @@ const authReducer = ( state = initialState, action ) => {
                 loggedUser: {},
                 isUserLogged: false,
                 token: ''
+            }
+        case SET_TOKEN:
+            return {
+                ...state,
+                token: action.token
             }
         default:
             return state;

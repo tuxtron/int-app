@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import CategorySlider from '../CategorySlider';
 import './Home.scss';
 import "react-multi-carousel/lib/styles.css";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {_fetch} from '../../services/appController';
 import * as authActions from '../../store/actions/auth';
@@ -12,10 +12,13 @@ import * as authActions from '../../store/actions/auth';
 
 function Home() {
 
+  const currentToken = useSelector(state => state.auth.token);
   let categories = useSelector(state => state.movies.categories);
   const featureMovies = useSelector(state => state.movies.featureMovies);
 
   const [currentSlide, setCurrentSlide] = useState(0);
+
+  const history = useHistory();
 
   const test = (oldIndex, newIndex) => {
     setCurrentSlide(newIndex);
@@ -65,10 +68,10 @@ function Home() {
     ]
   };
 
-//   useEffect(async () => {
-//     //await _fetch("https://ia-cms.herokuapp.com/api/v1/public/films", "GET").then((res) => res.json())
-//       //  .then((data) => console.log(data));
-//   }, []);
+  useEffect(() => {
+    console.log('currentToken: ', currentToken);
+    authActions.checkTokenExpiration(currentToken, history);
+  }, []);
 
   return (
     <div className="container">
