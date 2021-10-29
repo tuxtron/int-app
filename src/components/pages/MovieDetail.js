@@ -5,21 +5,85 @@ import { Link, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { AiFillHeart } from 'react-icons/ai';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+/*
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import Favorite from "@material-ui/icons/Favorite";
+import IconButton from '@material-ui/core/IconButton';
+
+const [fav, setFav] = React.useState(false);
+
+function handleFav(){
+      setFav(!fav)
+      if(fav == true){
+        //save it to firestore
+      }else{
+        //or delete it from firestore
+      }
+     
+    }
+
+export function readFavs(website,user) {
+  var postData = []
+  firestore.collection('favs').where("user", "==", user).where("website", "==", website).onSnapshot((snapshot) => {
+    snapshot.map((doc) => postData.push({ ...doc.data(), id: doc.id }));
+    
+})
+return postData; 
+}    
+    
+export function createFav(url,uid) {
+  return firestore
+    .collection("favs")
+    .add({
+      user: uid,
+      website: url
+    })
+    .then(function(docRef) {
+        console.log("Tutorial created with ID: ", docRef.id);
+    })
+    .catch(function(error) {
+        console.error("Error adding Tutorial: ", error);
+    });;
+}
+
+export function deleteFav(website,user) {
+  var dt = firestore.collection('favs').where('website','==',website).where('user','==',user);
+return dt.get().then(function(querySnapshot) {
+  querySnapshot.forEach(function(doc) {
+    doc.ref.delete();
+    console.log('deleted!')
+  });
+});
+}
+
+{fav && 
+<IconButton onClick={() => { setFav(!fav) }}  aria-label="delete" color="primary">
+<FavoriteBorderIcon></FavoriteBorderIcon>
+</IconButton>
+}
+{!fav &&
+<IconButton onClick={() => { setFav(!fav) }} aria-label="delete" color="primary">
+<Favorite></Favorite>
+</IconButton>
+}
+*/
 
 
 function MovieDetail(props) {
 
   let movie = props.location.movie;
-  console.log(movie);
+  //console.log(movie);
   const categories = useSelector(state => state.movies.categories);
   const featureMovies = useSelector(state => state.movies.featureMovies);
   let { category, movieName } = useParams();
   const [durationInHours, setDurationInHours] = useState(0);
+  const [isFav, setIsFav] = useState(false);
   const [launchDate, setLaunchDate] = useState(0);
-  const [isFav, setIsFav] = useState(true);
-  const [favs, setFavs] = useState([]);
   const [favAnimation, setFavAnimation] = useState(false);
- 
+
   if (!movie) {
     if (category !== 'feature') {
       movie = categories.filter(c => c.name === category)[0].movies.filter(m => m.movie.title === movieName)[0].movie;
@@ -29,6 +93,7 @@ function MovieDetail(props) {
   }
 
   useEffect(() => {
+    isFavourite(props.location.movie);
     function fixMinutes() {
       let hours = 0;
       while (movie.duration >= 60) {
@@ -41,16 +106,52 @@ function MovieDetail(props) {
   }, []);
 
   const updateFavs = m => {
-    
-    try{
-      if(Window.localstorage.getItem('favs')){
-        setFavs(Window.localstorage.getItem('favs'));
+
+    let favs = [];
+    let found = false;
+    try {
+      if (window.localStorage.getItem('favs')) {
+        favs = JSON.parse(window.localStorage.getItem('favs'));
+        console.log("My favs: " + favs);
       }
-      favs.append(m);
-      Window.localstorage.setItem('favs', favs);
-      console.log("FAVS: " + Window.localstorage.getItem('favs'));
-    }catch (e) {
+      if (favs.length !== 0) {
+        const aux = favs.filter((fav) => fav._id !== m._id);
+        console.log("AUX: " + JSON.stringify(aux));
+        if (aux.length === favs.length)
+          favs[favs.length] = m;
+        else
+          favs = aux;
+      } else
+        favs[favs.length] = m;
+      window.localStorage.setItem('favs', JSON.stringify(favs));
+      console.log("FAVS: " + window.localStorage.getItem('favs'));
+      console.log("CANT FAVS: " + JSON.parse(window.localStorage.getItem('favs')).length);
+    } catch (e) {
       console.log("Error: ", e);
+    }
+
+    isFavourite(m);
+
+  }
+
+  const isFavourite = m => {
+    let favs = [];
+
+    if (window.localStorage.getItem('favs')) {
+      favs = JSON.parse(window.localStorage.getItem('favs'));
+    } else {
+      setIsFav(false);
+    }
+
+    if (favs.length !== 0) {
+      const aux = favs.filter((fav) => fav._id !== m._id);
+      if (aux.length === favs.length)
+        setIsFav(true);
+      else {
+        setIsFav(false);
+      }
+    } else {
+      setIsFav(false);
     }
 
   }
@@ -79,10 +180,11 @@ function MovieDetail(props) {
             <p className="detail-movie-title">
               {movie.title}
             </p>
-            {isFav ?
-              <AiOutlineHeart style={{ margin: 20, fontSize: 40, color: 'rgba(255, 177, 65, 0.8)'}} onClick={()=> {setIsFav(!isFav); updateFavs(props.location.movie);}}/>
+            {isFav ?/*<FontAwesomeIcon icon={faHeart}/>*/
+
+              <AiOutlineHeart style={{ margin: 20, fontSize: 40, color: 'rgba(255, 177, 65, 0.8)' }} onClick={() => { updateFavs(props.location.movie); }} />
               :
-              <AiFillHeart style={{ margin: 20, fontSize: 40, color: 'rgba(255, 177, 65, 0.8)' }} onClick={()=> {setIsFav(!isFav); updateFavs(props.location.movie);}}/>
+              <AiFillHeart style={{ margin: 20, fontSize: 40, color: 'rgba(255, 177, 65, 0.8)' }} onClick={() => { updateFavs(props.location.movie); }} />
             }
           </div>
           <div className="tags-rows">
