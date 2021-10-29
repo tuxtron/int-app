@@ -70,7 +70,7 @@ function Navbar() {
                         <img src={movie.movie.imageMobile} alt="movie-img" />
                         <div className="result-info">
                             <p className="title">{movie.movie.title}</p>
-                            <p className="description">{movie.movie.description}</p>
+                            <p className="description">{movie.movie.description.slice(0, 200)}...</p>
                             <div className="tags">
                                 <span className="detail-tags">
                                     <span>★ </span>

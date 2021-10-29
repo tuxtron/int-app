@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import * as authActions from '../../store/actions/auth';
 import * as packageActions from '../../store/actions/package';
@@ -7,7 +7,6 @@ import './SignUp.scss';
 
 import background from '../../assets/images/signup-bg.png';
 import logo from '../../assets/images/logo_notflix.png';
-import { packages } from '../../dummy-data';
 
 import InputMask from 'react-input-mask';
 import ReactCardFlip from 'react-card-flip';
@@ -17,18 +16,22 @@ export default function SignUp(props) {
 
     const history = useHistory();
     const dispatch = useDispatch();
-    const allAvailablePackages = useSelector(state => state.package.allAvailablePackages);
+    const allAvailablePackages = useSelector(state => state.package.allAvailablePackages).filter(pack => pack.estado === 'activo');
 
-    let email = props.location.email;
-    let password = props.location.password;
+    if (!props.location.state) {
+        history.goBack();
+    }
+
+    let email = props.location.state.email;
+    let password = props.location.state.password || null;
 
     const [ step, setStep ] = useState(1);
 
     const [ nameInput, setNameInput ] = useState('');
     const [ firsNameInput, setFirstNameInput ] = useState('');
-    const [ birthdayInput, setBirthdayInput ] = useState('');
+    const [ phoneInput, setPhoneInput ] = useState('');
 
-    const [ selectedPackage, setSelectedPackage ] = useState(null);
+    const [ selectedPackage, setSelectedPackage ] = useState([]);
 
     const [ creditCardFlipped, setCreditCardFlipped ] = useState(false);
     const [ ccNumberInput, setCcNumberInput ] = useState('');
@@ -48,14 +51,14 @@ export default function SignUp(props) {
     }, []);
     
     const checkConfirmBtnAvailable = () => {
-        if (nameInput !== '' && firsNameInput !== '' && birthdayInput !== '' && !birthdayInput.includes('_')) {
+        if (nameInput !== '' && firsNameInput !== '' && phoneInput !== '' && !phoneInput.includes('_')) {
             return true;
         }
         return false;
     }
 
     const checkPackageBtnAvailable = () => {
-        return selectedPackage === null;
+        return selectedPackage.length !== 0;
     }
 
     const handleCcNameChange = (text) => {
@@ -143,21 +146,32 @@ export default function SignUp(props) {
                 password,
                 nameInput,
                 firsNameInput,
+                phoneInput,
+                selectedPackage,
                 setStep,
                 signUpErrorHandler
             )
         );
     }
     
+    const goToLanding = () => {
+        history.push('/');
+    }
 
   return (
       <>
         <div className="signup-container">
             <div className="signup-inputs-section">
-                <img src={logo} alt="logo" />
+                <img class="logo" src={logo} alt="logo"  onClick={goToLanding}/>
                 {step === 1 ? (
                     <div className="step-one-section">
-                        <p className="signup-text">Completá tus datos</p>
+                        <p className="signup-text">
+                            <Link to={{
+                                pathname: '/login',
+                                signUpPage: true
+                            }} className="orange">{'<'}</Link>
+                            Completá tus datos
+                        </p>
                         <div className="input-container">
                             <input
                                 type="text"
@@ -180,11 +194,10 @@ export default function SignUp(props) {
                         </div>
                         <div className="input-container">
                             <InputMask
-                                mask="99/99/9999"
-                                placeholder="Fecha de nacimiento (Example: 31/12/1990)"
-                                value={birthdayInput}
+                                placeholder="Teléfono"
+                                value={phoneInput}
                                 onChange={(event) => {
-                                    setBirthdayInput(event.target.value);
+                                    setPhoneInput(event.target.value);
                                     //   console.log(birthdayInput);
                                 }}
                             ></InputMask>
@@ -204,22 +217,37 @@ export default function SignUp(props) {
                 {step === 2 ? (
                     <div className="step-two-section">
                         <div className="greeting-section">
-                            <p className="greeting-text">Hola {nameInput} 👋🏻</p>
-                            <p className="greeting-text">
-                                Elegí un paquete para avanzar!
-                            </p>
+                            <div className="row">
+                                <span className="back-btn" onClick={() =>　setStep(1)}>{'<'}</span>
+                                <div className="right">
+                                    <p className="greeting-text">Hola {nameInput} 👋🏻</p>
+                                    <p className="greeting-text">
+                                        Elegí un paquete para avanzar!
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                         <div className="package-section">
                             {allAvailablePackages.map((p, index) => {
                                 return (
                                     <div
                                         className={
-                                            selectedPackage === index
+                                            selectedPackage.indexOf(p.id_paquete) !== -1
                                                 ? "package selected"
                                                 : "package"
                                         }
                                         key={index}
-                                        onClick={() => setSelectedPackage(index)}
+                                        onClick={() => {
+                                            const packageIndex = selectedPackage.indexOf(p.id_paquete);
+                                            if (packageIndex === -1) {
+                                                setSelectedPackage(selectedPackage.concat([p.id_paquete]));
+                                            } else {
+                                                let newSelected = [...selectedPackage];
+                                                newSelected.splice(packageIndex, 1);
+                                                setSelectedPackage(newSelected);
+                                            }
+        
+                                        }}
                                     >
                                         <div className="package-name">
                                             <div className="border">
@@ -242,8 +270,8 @@ export default function SignUp(props) {
                         <div
                             className={
                                 checkPackageBtnAvailable()
-                                    ? "package-btn"
-                                    : "package-btn active"
+                                    ? "package-btn active"
+                                    : "package-btn"
                             }
                             onClick={() => setStep(3)}
                         >

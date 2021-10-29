@@ -1,4 +1,3 @@
-import { InvalidTokenError } from "jwt-decode";
 
 export const loadMovies = async () => {
     fetch("https://ia-cms.herokuapp.com/api/v1/public/films")
