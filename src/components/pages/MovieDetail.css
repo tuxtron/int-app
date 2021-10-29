@@ -71,6 +71,7 @@
     align-items: center;
     justify-content: center;
     gap: 5px;
+    min-width: auto;
 }
 
 
@@ -79,6 +80,7 @@
     align-items: center;
     gap: 16px;
     margin-top: 28px;
+    width: auto;
 }
 
 .detail-descriptions{
@@ -91,7 +93,7 @@
 }
 
 .detail-card-left{
-    flex: 1;
+    flex: 1.75;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -127,6 +129,12 @@
     background: rgba(255, 177, 65, 0.8);
     width: 120px;
     height: 6px;
+}
+
+.detail-title-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 @media only screen and (max-width: 1000px) {

@@ -83,7 +83,7 @@ function Home() {
           {data.length != 0 ? (
             data[0].movies.map((movie, index) => {
               return (
-                <Link to={'/detail/feature/' + movie.movie.title}>
+                <Link to={`/detail/${data[0].name}/` + movie.movie.title}>
                   <div className={index === currentSlide ? 'active-feature-card' : 'blur-feature-card'}>
                     {/* <img className="feature-img" src={movie.url} alt="movie" /> */}
                     <img className="feature-img" src={movie.movie.imageCover} alt="movie" />
