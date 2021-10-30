@@ -30,12 +30,16 @@ function ConfirmDialog(props) {
                         <p className="title">{props.title}</p>
                         <p className="body">{props.body}</p>
                         <div className="row">
-                            <div className="confirmBtn" onClick={closeModal}>
+                            <div className={props.autogestion ? 'confirmBtn' : 'suscriptionBtn'} onClick={closeModal}>
                                 <p>Cerrar</p>
                             </div>
-                            <div className="suscriptionBtn" onClick={goToAutogestion}>
-                                <p>Modificar suscripción</p>
-                            </div>
+                            {
+                                props.autogestion ? (
+                                    <div className="suscriptionBtn" onClick={goToAutogestion}>
+                                        <p>Modificar suscripción</p>
+                                    </div>
+                                ) : null
+                            }
                         </div>
                     </div>
                 </div>
