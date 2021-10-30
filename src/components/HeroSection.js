@@ -3,7 +3,7 @@ import "../App.css";
 import { Button } from "./Button";
 import "./HeroSection.css";
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa";
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 
 const videos = [
   {

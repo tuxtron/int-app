@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Login.css';
-import { Link, useLocation, useHistory } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import * as authActions from '../../store/actions/auth';
 import ConfirmDialog from '../ConfirmDialog';
 
@@ -14,8 +14,13 @@ function Login(props) {
     const [ isSignUpPage, setIsSignUpPage ] = useState(signUpPage);
     const [ user, setUser ] = useState('');
     const [ password, setPassword ] = useState('');
+    const [ confirmPassword, setConfirmPassword ] = useState('');
 
     const [ openModal, setOpenModal ] = useState(false);
+    const [ openPasswordModal, setOpenPasswordModal ] = useState(false);
+    const [ openEmailPatternModal, setOpenEmailPatternModal ] = useState(false);
+
+
 
     const loginErrorHandler = () => {
         setOpenModal(true);
@@ -25,14 +30,37 @@ function Login(props) {
         dispatch(authActions.login(user, password, history, loginErrorHandler));
     }
 
+    const goToLanding = () => {
+        history.push('/');
+    }
+
+    const handleSignup = () => {
+        if (!checkEmailPattern()) {
+            setOpenEmailPatternModal(true);
+        } else if (password !== confirmPassword) {
+            setOpenPasswordModal(true);  
+        } else { 
+            history.push({pathname: '/sign-up', state: {
+                email: user,
+                password,
+            }})
+        }
+    }
+
+    const checkEmailPattern = () => {
+        const regex = new RegExp('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$');
+        return regex.test(user);
+    }
+
   return (
       <>
         <div className="login-block">
+            <img class="logo" src="/logo192.png" alt="logo" onClick={goToLanding} />
             <div className="login-container">
                 <p className="iniciar-sesion">
                     {isSignUpPage ? "Registrarte" : "Iniciar Sesión"}
                 </p>
-                <div className="email-box">
+                <div className={ isSignUpPage ? 'sign-up-box' : 'email-box' }>
                     <input
                         className="search-input"
                         type="text"
@@ -41,7 +69,7 @@ function Login(props) {
                         onChange={(event) => setUser(event.target.value)}
                     />
                 </div>
-                <div className="contraseña-box">
+                <div className={ isSignUpPage ? 'sign-up-box' : 'contraseña-box' }>
                     <input
                         className="search-input"
                         type="password"
@@ -50,18 +78,27 @@ function Login(props) {
                         onChange={(event) => setPassword(event.target.value)}
                     />
                 </div>
+                {
+                    isSignUpPage ? (
+                        <div className="sign-up-box">
+                            <input
+                                className="search-input"
+                                type="password"
+                                placeholder="Confirmar contraseña"
+                                value={confirmPassword}
+                                onChange={(event) => setConfirmPassword(event.target.value)}
+                            />
+                        </div>
+                    ) : null
+                }
                 {isSignUpPage ? (
                     <>
-                        <Link
-                            to={{
-                                pathname: "/sign-up",
-                                email: user,
-                                password,
-                            }}
+                        <div
+                            onClick={handleSignup}
                             className="sesion-section"
                         >
                             <p className="link-registar">Comenzá!</p>
-                        </Link>
+                        </div>
                         <p className="registarte">
                             {" "}
                             Ya tenés cuenta?
@@ -98,6 +135,18 @@ function Login(props) {
             closeHandler={() => setOpenModal(false)} 
             title="Credencial incorrecta"
             body="Hubo un error al iniciar sesión, por favor intentá nuevamente"
+        />
+        <ConfirmDialog 
+            open={openPasswordModal} 
+            closeHandler={() => setOpenPasswordModal(false)} 
+            title="Contraseñas incorrectas"
+            body="Las contraseñas ingresadas no coinciden, por favor ingresá nuevamente"
+        />
+        <ConfirmDialog 
+            open={openEmailPatternModal} 
+            closeHandler={() => setOpenEmailPatternModal(false)} 
+            title="Email inválido"
+            body="El formato de email es inválido, por favor ingresá nuevamente"
         />
       </>
   );

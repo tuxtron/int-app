@@ -38,17 +38,40 @@
             margin-bottom: 30px;
         }
 
-        .confirmBtn {
-            background: #D09137;
-            border-radius: 5px;
-            width: 160px;
-            height: 50px;
-            margin: 0 auto;
+        .row {
             display: flex;
             align-items: center;
             justify-content: center;
-            text-decoration: none;
-            cursor: pointer;
+            gap: 10px;
+
+            .confirmBtn {
+                background: transparent;
+                border: 1px solid #D09137;
+                border-radius: 5px;
+                width: 160px;
+                height: 50px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-decoration: none;
+                cursor: pointer;
+    
+                p {
+                    color: #D09137;
+                }
+            }
+    
+            .suscriptionBtn {
+                background: #D09137;
+                border-radius: 5px;
+                width: 230px;
+                height: 50px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-decoration: none;
+                cursor: pointer;
+            }
         }
     }
 }

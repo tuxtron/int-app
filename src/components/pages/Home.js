@@ -3,9 +3,8 @@ import Slider from "react-slick";
 import CategorySlider from '../CategorySlider';
 import './Home.scss';
 import "react-multi-carousel/lib/styles.css";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import {_fetch} from '../../services/appController';
 import * as authActions from '../../store/actions/auth';
 import * as moviesActions from '../../store/actions/movies';
 
@@ -13,15 +12,17 @@ import * as moviesActions from '../../store/actions/movies';
 
 function Home() {
 
+  const currentToken = useSelector(state => state.auth.token);
   let categories = useSelector(state => state.movies.categories);
   const featureMovies = useSelector(state => state.movies.featureMovies);
+  const data = useSelector(state => state.movies.movies);
 
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [data, setData] = useState([]);
-  const token = useSelector(state => state.auth.token);
+//   const [data, setData] = useState([]);
 
   const dispatch = useDispatch();
 
+  const history = useHistory();
 
   const test = (oldIndex, newIndex) => {
     setCurrentSlide(newIndex);
@@ -71,14 +72,20 @@ function Home() {
     ]
   };
 
+//   async function getAllMovies () {
+//     await _fetch("https://ia-cms.herokuapp.com/api/v1/public/web", "GET", currentToken).then((res) => res.json())
+//       .then((data) => {console.log(data); setData(data)});
+//   }
+
   useEffect( () => {
-    async function jose () {
-      await _fetch("https://ia-cms.herokuapp.com/api/v1/public/web", "GET", token).then((res) => res.json())
-        .then((data) => {console.log(data); setData(data)});
-    }
-    jose();
-    // dispatch(moviesActions.getCmsMovies(token));
-  }, []);
+      if (data.length === 0) {
+        dispatch(authActions.checkTokenExpiration(currentToken, history));
+        if (currentToken) {
+            // getAllMovies();
+            dispatch(moviesActions.getCmsMovies(currentToken));
+        }
+      }
+  }, [currentToken]);
 
   return (
     <div className="container">
@@ -87,7 +94,10 @@ function Home() {
           {data.length != 0 ? (
             data[0].movies.map((movie, index) => {
               return (
-                <Link to={`/detail/${data[0].name}/` + movie.movie.title}>
+                <Link key={index} to={{
+                    pathname: `/detail/${data[0].name}/` + movie.movie.title,
+                    movie: movie.movie
+                }}>
                   <div className={index === currentSlide ? 'active-feature-card' : 'blur-feature-card'}>
                     {/* <img className="feature-img" src={movie.url} alt="movie" /> */}
                     <img className="feature-img" src={movie.movie.imageCover} alt="movie" />
@@ -102,12 +112,12 @@ function Home() {
       </div>
       <div className="category-section">
         {
-          data.map(category => {
+          data.map((category, index) => {
             return (
-              <>
+              <div key={index} style={{width: '100%'}}>
                 <p className="category-title">{category.name}</p>
                 <CategorySlider movies={category.movies} category={category.name}></CategorySlider>
-              </>
+              </div>
             )
           })
         }

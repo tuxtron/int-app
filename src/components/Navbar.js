@@ -37,16 +37,7 @@ function Navbar() {
 
     useEffect(() => {
         showButton();
-        // console.log('isUserLogged: ', isUserLogged);
-        // if (!isUserLogged) {
-        //     const userDataFromLS = JSON.parse(localStorage.getItem('notflixUserDate'));
-        //     const currentTime = new Date().getTime();
-        //     if (userDataFromLS?.exp && userDataFromLS.exp * 1000 > currentTime ) {
-        //         dispatch(authActions.setUserData(userDataFromLS));
-        //     } else {
-        //         history.push('/login');
-        //     }
-        // }
+        authActions.checkTokenExpiration(token, history);
     }, []);
 
     window.addEventListener('resize', showButton);
@@ -79,7 +70,7 @@ function Navbar() {
                         <img src={movie.movie.imageMobile} alt="movie-img" />
                         <div className="result-info">
                             <p className="title">{movie.movie.title}</p>
-                            <p className="description">{movie.movie.description}</p>
+                            <p className="description">{movie.movie.description.slice(0, 200)}...</p>
                             <div className="tags">
                                 <span className="detail-tags">
                                     <span>★ </span>
@@ -177,9 +168,11 @@ function Navbar() {
                                           />
                                       </div>
                                       <p className="menu-name">
-                                          {user.name + " " + user.last_name}
+                                            {
+                                              user ?  user.name + " " + user.last_name : ''
+                                            }
                                       </p>
-                                      <p className="menu-email">{user.email}</p>
+                                      <p className="menu-email">{ user ? user.email : ''}</p>
                                       <div
                                           className="self-managment-btn"
                                           onClick={() => {}}

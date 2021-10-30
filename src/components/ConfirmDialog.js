@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import './ConfirmDialog.scss';
 
 function ConfirmDialog(props) {
 
+    const token = useSelector(state => state.auth.token);
     const [ open, setOpen ] = useState(props.open);
 
     useEffect(() => {
@@ -15,6 +16,11 @@ function ConfirmDialog(props) {
         setOpen(false);
     }
 
+    const goToAutogestion = () => {
+        window.open(`https://facturacion-front.vercel.app/?from=web&token=${token}`);
+        setOpen(false);
+    }
+
   return (
       <>
         {
@@ -23,8 +29,13 @@ function ConfirmDialog(props) {
                     <div className="dialog-container">
                         <p className="title">{props.title}</p>
                         <p className="body">{props.body}</p>
-                        <div className="confirmBtn" onClick={closeModal}>
-                            <p>Confirmar</p>
+                        <div className="row">
+                            <div className="confirmBtn" onClick={closeModal}>
+                                <p>Cerrar</p>
+                            </div>
+                            <div className="suscriptionBtn" onClick={goToAutogestion}>
+                                <p>Modificar suscripción</p>
+                            </div>
                         </div>
                     </div>
                 </div>
