@@ -175,6 +175,13 @@ function Navbar() {
                                       <p className="menu-email">{ user ? user.email : ''}</p>
                                       <div
                                           className="self-managment-btn"
+                                          onClick={() => {}}
+                                          style={{marginTop:'15px'}}
+                                      >
+                                          <p>Mis Favoritos (WIP)</p>
+                                      </div>
+                                      <div
+                                          className="self-managment-btn"
                                           onClick={openSelfManagmentWindow}
                                       >
                                           <p>Autogestión</p>

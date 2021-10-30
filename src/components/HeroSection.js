@@ -56,13 +56,13 @@ function HeroSection() {
         </Col>
         <p>¿Qué estás esperando?</p>
         <div className="hero-btns">
-          <Button
+          {/* <Button
             className="btns"
             buttonStyle="btn--outline"
             buttonSize="btn--large"
           >
             SUSCRIBITE
-          </Button>
+          </Button> */}
           {/* <Button
             className="btns"
             buttonStyle="btn--primary"
