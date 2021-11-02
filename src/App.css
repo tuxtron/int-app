@@ -12,6 +12,10 @@ html {
     background-color: #121313 !important;
 }
 
+body {
+  background-color: #121313 !important;
+}
+
 p {
     color: var(--text-white);
     font-family: 'Raleway';
