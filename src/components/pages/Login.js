@@ -134,7 +134,11 @@ function Login(props) {
                 Aun no tienes cuenta?
                 <span
                   className="underline"
-                  onClick={() => setIsSignUpPage(true)}
+                  onClick={() => {
+                    setIsSignUpPage(true);
+                    setUser("");
+                    setPassword("");
+                  }}
                 >
                   Registrate
                 </span>
@@ -145,7 +149,7 @@ function Login(props) {
       </div>
       <ConfirmDialog
         open={openModal}
-        closeHandler={() => setOpenModal(false)}
+        closeHandler={() => { setOpenModal(false); setLoginSpinner(false)}}
         title="Credencial incorrecta"
         body="Hubo un error al iniciar sesión, por favor intentá nuevamente"
       />
