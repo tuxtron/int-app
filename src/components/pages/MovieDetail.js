@@ -19,6 +19,7 @@ function MovieDetail(props) {
 
   let { category, movieName } = useParams();
   const [durationInHours, setDurationInHours] = useState(0);
+  const [durationInMinutes, setDurationInMinutes] = useState(0);
   const [isFav, setIsFav] = useState(false);
   const [launchDate, setLaunchDate] = useState(0);
   const [favAnimation, setFavAnimation] = useState(false);
@@ -59,19 +60,22 @@ function MovieDetail(props) {
   }, [currentToken]);
 
   useEffect(() => {
+      console.log("bucle")
     if (movie) {
       isFavourite(movie);
       function fixMinutes() {
         let hours = 0;
-        while (movie.duration >= 60) {
+        let minutes = movie.duration;
+        while (minutes >= 60) {
           hours += 1;
-          movie.duration -= 60;
+          minutes -=60;
         }
+        setDurationInMinutes(minutes);
         setDurationInHours(hours);
       }
       fixMinutes();
     }
-  }, []);
+  }, [movie]);
 
   const updateFavs = (m) => {
     let favs = [];
@@ -210,7 +214,7 @@ function MovieDetail(props) {
                 <span className="detail-tags">{movie.director}</span>
                 <span className="detail-tags">{movie.minAge}</span>
                 <span className="detail-tags">
-                  {durationInHours}h {movie.duration}min
+                  {durationInHours}h {durationInMinutes}min
                 </span>
                 <span className="detail-tags">{category}</span>
                 <span className="detail-tags">

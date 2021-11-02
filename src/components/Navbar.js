@@ -36,6 +36,8 @@ function Navbar() {
     };
 
     useEffect(() => {
+        localStorage.setItem('showFavModal', false);
+        console.log(localStorage.getItem("showFavModal"));
         showButton();
         authActions.checkTokenExpiration(token, history);
     }, []);
@@ -87,6 +89,12 @@ function Navbar() {
     const openSelfManagmentWindow = () => {
         window.open(`https://facturacion-front.vercel.app/?from=web&token=${token}`);
         setShowMenu(false);
+    }
+
+    const openFavModal = () => {
+        toggleMenu();
+        localStorage.setItem('showFavModal', true);
+        console.log(localStorage.getItem("showFavModal"));
     }
 
     const signOutBtnClicked = () => {
@@ -175,10 +183,10 @@ function Navbar() {
                                       <p className="menu-email">{ user ? user.email : ''}</p>
                                       <div
                                           className="self-managment-btn"
-                                          onClick={() => {}}
+                                          onClick={openFavModal}
                                           style={{marginTop:'15px'}}
                                       >
-                                          <p>Mis Favoritos (WIP)</p>
+                                          <p>Mis Favoritos</p>
                                       </div>
                                       <div
                                           className="self-managment-btn"
