@@ -51,10 +51,10 @@ function HeroSection() {
             </>
           );
         })}
-        <Col md={12} lg={12}>
-          <h1 className="text-center landing-title">LA AVENTURA TE ESPERA</h1>
+        <Col md={12} lg={12} className="text-center">
+          <h1 className="landing-title">LA AVENTURA TE ESPERA</h1>
+        <h1 className=" text-center p-land">¿Qué estás esperando?</h1>
         </Col>
-        <p>¿Qué estás esperando?</p>
         <div className="hero-btns">
           {/* <Button
             className="btns"

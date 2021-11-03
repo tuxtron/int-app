@@ -74,6 +74,24 @@
     min-width: auto;
 }
 
+.detail-tags-2{
+    font-family: "Raleway";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 15px;
+    color: #FFFFFF;
+    background: rgba(212, 147, 55, 0.5);
+    backdrop-filter: blur(2px);
+    border-radius: 17.5px;
+    padding: 5px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    min-width: auto;
+}
+
 
 .tags-rows{
     display: flex;
@@ -148,11 +166,18 @@
     }
     .detail-card-left{
         width: 90%;
-        
+    }
+    .detail-descriptions{
+        width: 90% ;
+    }
+    .detail-movie-title{
+        width: 80%;
+        padding-top: 40px;
     }
     .detail-card-rigth{
         width: 90%;
-        margin-left: -195px;
+        margin-left: -500px;
+        margin-top: -40px;
         flex: 1;
         display: block;
     }
@@ -163,7 +188,7 @@
 
 @media only screen and (max-width: 600px) {
     .detail-container{
-        width:350px;
+        width:500px;
     }
     .detail-card{
         width: 90%;
@@ -172,7 +197,14 @@
     }
     .detail-card-left{
         width: 90%;
-        
+    }
+    .detail-movie-title{
+        width: 80%;
+        margin-top: 30px;
+        padding-top: 20px;
+    }
+    .detail-tags{
+        max-width: 50px;
     }
     .detail-card-rigth{
         width: 90%;

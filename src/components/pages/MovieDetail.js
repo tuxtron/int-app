@@ -177,6 +177,7 @@ function MovieDetail(props) {
             <div className="detail-card-left">
               <div className="detail-title-container">
                 <p className="detail-movie-title">{movie.title}</p>
+                <div className="svg-title">
                 {isFav /*<FontAwesomeIcon icon={faHeart}/>*/ ? (
                   <AiOutlineHeart
                     style={{
@@ -202,13 +203,16 @@ function MovieDetail(props) {
                     }}
                   />
                 )}
+                </div>
               </div>
               <div className="tags-rows">
+
                 <span className="detail-tags">
                   {new Date(movie.launch).getFullYear()}
                 </span>
                 <span className="detail-tags">{movie.director}</span>
                 <span className="detail-tags">{movie.minAge}</span>
+
                 <span className="detail-tags">
                   {durationInHours}h {movie.duration}min
                 </span>
@@ -217,6 +221,7 @@ function MovieDetail(props) {
                   <span>★ </span>
                   <span>{movie.value}</span>
                 </span>
+
               </div>
               <p className="detail-descriptions">{movie.description}</p>
             </div>

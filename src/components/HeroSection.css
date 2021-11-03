@@ -7,8 +7,15 @@ video {
 }
 
 .landing-title {
+  text-align: center;
     font-size: 60px;
     color: #fff;
+}
+
+.p-land {
+  text-align: center;
+  font-size: 25px;
+  color: #fff;
 }
 
 .slider{
@@ -116,5 +123,16 @@ video {
 
   .btn {
     width: 100%;
+  }
+
+  .landing-title {
+    text-align: center;
+    font-size: 30px;
+    color: #fff;
+  }
+
+  .p-land {
+    text-align: center;
+    font-size: 15px
   }
 }
