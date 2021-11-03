@@ -19,11 +19,12 @@
     flex-direction: column;
     align-self: center ;
     width: 580px;
-    height: 586px;
+    height: 626px;
     background: rgba(40, 38, 38, 0.88);
     backdrop-filter: blur(5px);
     border-radius: 10px;
     margin: 0 auto;
+    padding-bottom: 20px;
 
 }
 
@@ -76,7 +77,6 @@
     padding: 22px 34px;
     margin-bottom: 80px;
 }
-
 .sign-up-box {
     border: 1px solid #000;
     font-family: "Raleway";
@@ -101,8 +101,9 @@
     background: #D09137;
     border-radius: 5px;
     width: 418px;
-    height: 66px;
+    height: 80px;
     margin: 0 auto;
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -129,13 +130,12 @@
     margin: 0 auto;
 }
 
-
-
 .link-registar{
     text-decoration: none;
-    font-size: 20px;
+    font-size: 22px;
     line-height: 21px;
     color: #FFFFFF;
+    min-height: 35px;
 }
 
 .underline {

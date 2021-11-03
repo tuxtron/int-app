@@ -64,7 +64,7 @@ function Login(props) {
           <p className="iniciar-sesion">
             {isSignUpPage ? "Registrarte" : "Iniciar Sesión"}
           </p>
-          <div className={isSignUpPage ? "sign-up-box" : "email-box"}>
+          <div className={"email-box"}>
             <input
               className="search-input"
               type="text"
@@ -74,7 +74,7 @@ function Login(props) {
               onChange={(event) => setUser(event.target.value)}
             />
           </div>
-          <div className={isSignUpPage ? "sign-up-box" : "contraseña-box"}>
+          <div className={"email-box"}>
             <input
               className="search-input"
               type="password"
@@ -84,7 +84,7 @@ function Login(props) {
             />
           </div>
           {isSignUpPage ? (
-            <div className="sign-up-box">
+            <div className={"email-box"}>
               <input
                 className="search-input"
                 type="password"

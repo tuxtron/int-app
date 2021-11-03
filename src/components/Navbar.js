@@ -128,7 +128,7 @@ function Navbar() {
                                       <input
                                           className="search-input"
                                           type="text"
-                                          placeholder="Qué estás buscando?"
+                                          placeholder="¿Qué buscas?"
                                           value={searchText}
                                           onChange={(event) =>
                                               setSearchText(event.target.value)
