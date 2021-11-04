@@ -420,7 +420,7 @@ export default function SignUp(props) {
                     color="#FFFFFF"
                     height={20}
                     width={20}
-                    timeout={300000} //3 secs
+                    timeout={10000} //10 secs
                   />
                 ) : (
                   <p>Confirmar</p>

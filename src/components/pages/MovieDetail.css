@@ -7,7 +7,7 @@
 }
 
 .detail-link{
-    text-decoration: none;
+    text-decoration: none !important;
 }
 
 .detail-button{
@@ -17,7 +17,6 @@
     width: 48px;
     gap: 12px;
     margin: 50px 0px 28px 6%;
-
 }
 
 .detail-back-button-text{

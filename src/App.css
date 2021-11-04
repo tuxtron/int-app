@@ -7,9 +7,13 @@
 
 
 html {
-    --background-dark: #121313;
+    --background-dark: #121313 !important;
     --text-white: #FEFEFE;
-    background-color: #121313;
+    background-color: #121313 !important;
+}
+
+body {
+  background-color: #121313 !important;
 }
 
 p {

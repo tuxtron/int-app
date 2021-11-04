@@ -177,7 +177,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  text-decoration: none;
+  text-decoration: none !important;
   padding: 0.5rem 1rem;
   height: 100%;
   width: 150px;
@@ -186,6 +186,7 @@
 .nav-links:hover {
   border-bottom: 4px solid #fff;
   transition: all 0.2s ease-out;
+  color: #fff;
 }
 
 .fa-bars {

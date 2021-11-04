@@ -7,9 +7,9 @@ import "react-multi-carousel/lib/styles.css";
 
 import { categoryMovies } from '../dummy-data';
 
-function CategorySlider(props) {
+function FavouriteSlider(props) {
 
-    //console.log('MOVIES: ', props.movies);
+    console.log('MOVIES F: ', props.movies);
     const category = props.category;
 
     var settings = {
@@ -81,13 +81,13 @@ function CategorySlider(props) {
                     <Link
                         key={index}
                         to={{
-                            pathname: `/detail/${category}/${m.movie.title}`,
-                            movie: m.movie,
+                            pathname: `/detail/${category}/${m.title}`,
+                            movie: m,
                             category
                         }}
                     >
                         <div className="category-movie-card">
-                            <img className="movie-img" src={m.movie.imageMobile} alt="movie" />
+                            <img className="movie-img" src={m.imageMobile} alt="movie" />
                         </div>
                     </Link>
                 )
@@ -98,4 +98,4 @@ function CategorySlider(props) {
   );
 }
 
-export default CategorySlider;
+export default FavouriteSlider;

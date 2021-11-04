@@ -23,6 +23,18 @@
     transition: all 200ms ease-in-out;
 }
 
+.drawer-body, .drawer-header{
+    background-color: var(--background-dark);
+}
+
+.drawer-header {
+    border-bottom: 1px solid #F4AA3F !important;
+}
+
+.drawer-body {
+    box-shadow: initial;
+}
+
 .blur-feature-card {
     filter: blur(2px);
     height: 282px !important;
@@ -70,6 +82,10 @@
     @media screen and (max-width: 599px) {
         max-width: 240px;
     }
+}
+
+.fav-modal {
+
 }
 
 .category-title {
