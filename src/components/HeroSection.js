@@ -14,9 +14,6 @@ const videos = [
   {
     video: "/videos/video-3.mp4",
   },
-  {
-    video: "/videos/video-4.mp4",
-  },
 ];
 
 function HeroSection() {
