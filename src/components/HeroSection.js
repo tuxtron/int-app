@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "../App.css";
-import { Button } from "./Button";
 import "./HeroSection.css";
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa";
 import { Row, Col } from "react-bootstrap";

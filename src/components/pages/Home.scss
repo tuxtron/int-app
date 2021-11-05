@@ -54,6 +54,10 @@
     height: 100%;
     border-radius: 15px !important;
     object-fit: cover !important;
+
+    @media screen and (max-width: 1290px) {
+        width: 80%;        
+    }
 }
 
 .category-section {
@@ -100,6 +104,16 @@
 /* -------------- CUSTOM SLICKER -------------- */
 
 .features-section {
+    position: relative;
+
+    .card-background {
+        position: absolute;
+        height: 110%;
+        width: 100%;
+        filter: opacity(0.25) blur(50px);
+        object-fit: cover;
+    }
+
     .slick-next {
         right: 25px;
         z-index: 5;
@@ -111,7 +125,7 @@
     }
     
     .slick-slider {
-        margin-top: 80px;
+        padding-top: 2%;
         padding-bottom: 50px;
     }
     
@@ -175,4 +189,11 @@
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
+}
+
+.loader-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 77vh;
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from './Button';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -17,32 +17,31 @@ function Navbar() {
     const token = useSelector(state => state.auth.token);
 
     const [ click, setClick ] = useState(false);
-    const [ button, setButton ] = useState(true);
     const [ showMenu, setShowMenu ] = useState(false);
     const [ searchText, setSearchText ] = useState('');
+    const [ openSearchMenu, setOpenSearch ] = useState(false);
 
     const allMovies = useSelector(state => state.movies.allMovies);
-    // console.log(allMovies);
 
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
-
-    const showButton = () => {
-        if (window.innerWidth <= 960) {
-            setButton(false);
-        } else {
-            setButton(true);
-        }
-    };
+    const wrapperRef = useRef(null);
 
     useEffect(() => {
         localStorage.setItem('showFavModal', false);
         console.log(localStorage.getItem("showFavModal"));
-        showButton();
         authActions.checkTokenExpiration(token, history);
+        function handleClickOutside(event) {
+            if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+                setOpenSearch(false);
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", (event) => handleClickOutside(event));
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
-    window.addEventListener('resize', showButton);
 
     const showNavbar = () => {
         const currentPath = location.pathname.split('/');
@@ -56,10 +55,11 @@ function Navbar() {
 
     const getSearchResults = () => {
         const searchedMovies = allMovies.filter(movie => movie.movie.title.toLowerCase().includes(searchText.toLowerCase()));
+        const uniqueMovies = [...new Map(searchedMovies.map(m => [m.movie['title'], m])).values()]
         if ( searchedMovies.length === 0 ) {
             return <p>No se encontró ninguna película</p>;
         } else {
-            return searchedMovies.map(movie => {
+            return uniqueMovies.map(movie => {
                 return (
                     <Link  
                         to={{
@@ -109,7 +109,7 @@ function Navbar() {
               <nav className="navbar">
                   <div className="navbar-container">
                       <Link
-                          to="/"
+                          to={ isUserLogged ? '/home' : '/' }
                           className="navbar-logo"
                           onClick={closeMobileMenu}
                       >
@@ -138,12 +138,16 @@ function Navbar() {
                                           type="text"
                                           placeholder="¿Qué buscas?"
                                           value={searchText}
-                                          onChange={(event) =>
-                                              setSearchText(event.target.value)
-                                          }
+                                          onChange={(event) => {
+                                            setSearchText(event.target.value);
+                                            setOpenSearch(true);
+                                          }}
+                                          onFocus={() => {
+                                              setOpenSearch(true);
+                                          }}
                                       />
-                                      {searchText !== "" ? (
-                                          <div className="search-result-section">
+                                      { openSearchMenu && searchText !== "" ? (
+                                          <div className="search-result-section" ref={wrapperRef}>
                                               {getSearchResults()}
                                           </div>
                                       ) : null}

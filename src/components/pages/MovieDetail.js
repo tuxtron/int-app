@@ -5,8 +5,6 @@ import { Link, useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import Loader from "react-loader-spinner";
 import * as moviesActions from "../../store/actions/movies";
 import * as authActions from "../../store/actions/auth";
@@ -21,8 +19,6 @@ function MovieDetail(props) {
   const [durationInHours, setDurationInHours] = useState(0);
   const [durationInMinutes, setDurationInMinutes] = useState(0);
   const [isFav, setIsFav] = useState(false);
-  const [launchDate, setLaunchDate] = useState(0);
-  const [favAnimation, setFavAnimation] = useState(false);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -57,6 +53,7 @@ function MovieDetail(props) {
         dispatch(moviesActions.getCmsMovies(currentToken, setLoading));
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentToken]);
 
   useEffect(() => {
@@ -79,7 +76,6 @@ function MovieDetail(props) {
 
   const updateFavs = (m) => {
     let favs = [];
-    let found = false;
     try {
       if (window.localStorage.getItem("favs")) {
         favs = JSON.parse(window.localStorage.getItem("favs"));

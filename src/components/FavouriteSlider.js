@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom';
 import './CategorySlider.scss';
 import "react-multi-carousel/lib/styles.css";
 
-import { categoryMovies } from '../dummy-data';
-
 function FavouriteSlider(props) {
 
     console.log('MOVIES F: ', props.movies);

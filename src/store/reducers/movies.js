@@ -1,6 +1,5 @@
 import {
     SET_MOVIES,
-    SET_ALL_MOVIES
 } from '../actions/movies';
 
 const initialState = {

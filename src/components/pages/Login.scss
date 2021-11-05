@@ -19,12 +19,12 @@
     flex-direction: column;
     align-self: center ;
     width: 580px;
-    height: 626px;
+    height: auto;
     background: rgba(40, 38, 38, 0.88);
     backdrop-filter: blur(5px);
     border-radius: 10px;
     margin: 0 auto;
-    padding-bottom: 20px;
+    padding-bottom: 70px;
 
 }
 
@@ -101,7 +101,7 @@
     background: #D09137;
     border-radius: 5px;
     width: 418px;
-    height: 80px;
+    height: 66px !important;
     margin: 0 auto;
     margin-bottom: 20px;
     display: flex;
@@ -110,6 +110,11 @@
     margin-bottom: 38px;
     text-decoration: none;
     cursor: pointer;
+
+    svg {
+        position: relative;
+        top: 3px;
+    }
 }
 
 .iniciarSesion{
@@ -135,7 +140,7 @@
     font-size: 22px;
     line-height: 21px;
     color: #FFFFFF;
-    min-height: 35px;
+    min-height: 22px;
 }
 
 .underline {

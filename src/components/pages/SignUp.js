@@ -53,6 +53,7 @@ export default function SignUp(props) {
 
   useEffect(() => {
     dispatch(packageActions.getAllPackages());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const checkConfirmBtnAvailable = () => {
@@ -212,6 +213,8 @@ export default function SignUp(props) {
                 <InputMask
                   placeholder="Teléfono"
                   value={phoneInput}
+                  mask={"9".repeat(13)}
+                  maskChar=""
                   onChange={(event) => {
                     setPhoneInput(event.target.value);
                     //   console.log(birthdayInput);
@@ -359,18 +362,22 @@ export default function SignUp(props) {
               </ReactCardFlip>
               <div className="credit-card-info">
                 <div className="input-container">
-                  <input
+                  <InputMask
                     type="text"
                     placeholder="Nombre y apellido"
                     value={ccNameInput}
+                    mask={"a".repeat(29)}
+                    maskChar=" "
                     onChange={(event) => handleCcNameChange(event.target.value)}
                     onFocus={() => setCreditCardFlipped(false)}
                   />
                 </div>
                 <div className="input-container">
-                  <input
+                  <InputMask
                     type="text"
                     placeholder="Número de tarjeta"
+                    mask={ccNameInput[0] === 3 ? "9".repeat(15) : "9".repeat(16)}
+                    maskChar=""
                     value={ccNumberInput}
                     onChange={(event) =>
                       handleCcNumberChange(event.target.value)
@@ -381,7 +388,7 @@ export default function SignUp(props) {
                 </div>
                 <div className="row">
                   <div className="input-container">
-                    <input
+                    <InputMask
                       type="text"
                       placeholder="Vencimiento"
                       value={ccExpiredDateInput}
@@ -389,10 +396,12 @@ export default function SignUp(props) {
                         handleExpiredDateChange(event.target.value)
                       }
                       onFocus={() => setCreditCardFlipped(false)}
+                      mask="99/99"
+                      maskChar=""
                     />
                   </div>
                   <div className="input-container">
-                    <input
+                    <InputMask
                       type="text"
                       placeholder="Cod. Seguridad"
                       value={ccSecurityCodeInput}
@@ -401,6 +410,8 @@ export default function SignUp(props) {
                       }
                       maxLength={ccNumberInput[0] === "3" ? 4 : 3}
                       onFocus={() => setCreditCardFlipped(true)}
+                      mask="9999"
+                      maskChar=""
                     />
                   </div>
                 </div>

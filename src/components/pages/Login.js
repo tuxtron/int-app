@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Login.css";
+import "./Login.scss";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import * as authActions from "../../store/actions/auth";
@@ -51,6 +51,16 @@ function Login(props) {
     }
   };
 
+  const handleKeyPress = (event) => {
+    if (event.charCode === 13) {
+        if (isSignUpPage) {
+            handleSignup();
+        } else {
+            login();
+        }
+    }
+  }
+
   const checkEmailPattern = () => {
     const regex = new RegExp("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$");
     return regex.test(user);
@@ -72,6 +82,7 @@ function Login(props) {
               autofocus
               value={user}
               onChange={(event) => setUser(event.target.value)}
+              onKeyPress={(event) => handleKeyPress(event)}
             />
           </div>
           <div className={"email-box"}>
@@ -81,6 +92,7 @@ function Login(props) {
               placeholder="Contraseña"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
+              onKeyPress={(event) => handleKeyPress(event)}
             />
           </div>
           {isSignUpPage ? (
@@ -91,6 +103,7 @@ function Login(props) {
                 placeholder="Confirmar contraseña"
                 value={confirmPassword}
                 onChange={(event) => setConfirmPassword(event.target.value)}
+                onKeyPress={(event) => handleKeyPress(event)}
               />
             </div>
           ) : null}
@@ -120,9 +133,9 @@ function Login(props) {
                     <Loader
                       type="Oval"
                       color="#FFFFFF"
-                      height={50}
-                      width={50}
-                      timeout={10000} //10 secs
+                      height={40}
+                      width={40}
+                      timeout={500000} //10 secs
                     />
                   ) : (
                     "Iniciar Sesión"
