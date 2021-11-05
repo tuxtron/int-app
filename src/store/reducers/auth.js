@@ -4,6 +4,7 @@ import {
     SIGN_OUT,
     SET_TOKEN,
     SET_NAVBAR_OPEN,
+    SET_SEARCHBAR_OPEN
 } from '../actions/auth';
 
 const initialState = {
@@ -11,6 +12,7 @@ const initialState = {
     token: undefined,
     isUserLogged: false,
     navbarMenuOpen: false,
+    searchBarOpen: false,
     // loggedUser: {
     //     admin: false,
     //     email: "chyao@test.com",
@@ -57,6 +59,11 @@ const authReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 navbarMenuOpen: action.open
+            }
+        case SET_SEARCHBAR_OPEN:
+            return {
+                ...state,
+                searchBarOpen: action.open
             }
         default:
             return state;

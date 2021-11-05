@@ -34,6 +34,7 @@ function Navbar() {
         function handleClickOutside(event) {
             if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
                 setOpenSearch(false);
+                dispatch(authActions.toggleSearchBar(openSearchMenu));
             }
         }
         document.addEventListener("mousedown", handleClickOutside);
@@ -90,6 +91,7 @@ function Navbar() {
     const openSelfManagmentWindow = () => {
         window.open(`https://facturacion-front.vercel.app/?from=web&token=${token}`);
         setShowMenu(false);
+        dispatch(authActions.toggleNavBar(false));
     }
 
     const openFavModal = () => {
@@ -101,6 +103,7 @@ function Navbar() {
     const signOutBtnClicked = () => {
         dispatch(authActions.signOut());
         setShowMenu(false);
+        dispatch(authActions.toggleNavBar(false));
         history.push('/');
     }
 
@@ -142,9 +145,11 @@ function Navbar() {
                                           onChange={(event) => {
                                             setSearchText(event.target.value);
                                             setOpenSearch(true);
+                                            dispatch(authActions.toggleSearchBar(true));
                                           }}
                                           onFocus={() => {
                                               setOpenSearch(true);
+                                              dispatch(authActions.toggleSearchBar(true));
                                           }}
                                       />
                                       { openSearchMenu && searchText !== "" ? (

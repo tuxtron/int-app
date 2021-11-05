@@ -7,6 +7,7 @@ export const SET_USER = 'SET_USER';
 export const SIGN_OUT = 'SIGN_OUT';
 export const SET_TOKEN = 'SET_TOKEN';
 export const SET_NAVBAR_OPEN = 'SET_NAVBAR_OPEN';
+export const SET_SEARCHBAR_OPEN = 'SET_SEARCHBAR_OPEN';
 
 const SSO_BASE_API_URL = 'https://singlesignonbackend.herokuapp.com/api/users/';
 const PACKAGE_BASE_API_URL = 'https://suscripciones-backend.herokuapp.com/api/';
@@ -87,41 +88,70 @@ export const signOut = () => {
 export const signUp = (email, password, name, last_name, phone, selectedPackage, nextStep, errorCallback) => {
     // console.log({email, password, name, last_name});
     return async dispatch => {
-        await axios.post(SSO_BASE_API_URL + 'register', {
-            email,
-            password,
-            tenant: 'web',
-            name,
-            last_name,
-            admin: false
-        })
-        .then( res => {
-            if (res.status === 201) {
-                // console.log( 'ÉXITO: SSO-API /register' ); 
-                // console.log( 'Resultado del register: \n', res.data);
-                axios.post(PACKAGE_BASE_API_URL + 'subscriptions/v1/create', {
-                    id_usuario: res.data.user._id,
-                    paquetes: selectedPackage,
-                    firstName: name,
-                    lastName: last_name,
-                    email,
-                    telephone: phone
-                }).then( res => {
-                    if (res.status === 201) {
-                        nextStep(4);
-                    }
-                })
-                .catch( err => {
-                    console.log( 'ERROR: PYS-API /create' );
-                    console.log( 'Error: ', err );
-                });
-            }
-        })
-        .catch( err => {
-            console.log( 'ERROR: SSO-API /register' );
-            console.log( 'Error: ', err );
-            errorCallback();
-        })
+        await axios
+            .post(SSO_BASE_API_URL + "register", {
+                email,
+                password,
+                tenant: "web",
+                name,
+                last_name,
+                admin: false,
+            })
+            .then((res) => {
+                if (res.status === 201) {
+                    console.log( 'ÉXITO: SSO-API /register' );
+                    console.log( 'Resultado del register: \n', res.data);
+
+                    axios.post(SSO_BASE_API_URL + 'login', {
+                        email,
+                        password,
+                        tenant: 'web'
+                    })
+                    .then( res2 => {
+                        if (res2.status === 200) {
+                            // console.log( 'ÉXITO: SSO-API /login' ); 
+                            // console.log( 'Resultado del usuario: \n', res.data);
+                            // res.data.token
+                            axios
+                            .post(
+                                PACKAGE_BASE_API_URL + "subscriptions/v1/create",
+                                {
+                                    id_usuario: res.data.user._id,
+                                    paquetes: selectedPackage,
+                                    firstName: name,
+                                    lastName: last_name,
+                                    email,
+                                    telephone: phone,
+                                },
+                                {
+                                    headers: {
+                                        "Authorization": 'Bearer ' + res2.data.token,
+                                    },
+                                }
+                            )
+                            .then((res3) => {
+                                if (res3.status === 201) {
+                                    nextStep(4);
+                                }
+                            })
+                            .catch((err) => {
+                                console.log("ERROR: PYS-API /create");
+                                console.log("Error: ", err);
+                            });
+                        }
+                    })
+                    .catch( err => {
+                        console.log( 'ERROR: SSO-API /login' );
+                        console.log( 'Error: ', err );
+                        errorCallback();
+                    });
+                }
+            })
+            .catch((err) => {
+                console.log("ERROR: SSO-API /register");
+                console.log("Error: ", err);
+                errorCallback();
+            });
     }
     // RESPONSE EXAMPLE for register
     // {
@@ -231,6 +261,15 @@ export const toggleNavBar = (open) => {
     return dispatch => {
         dispatch({
             type: SET_NAVBAR_OPEN,
+            open,
+        })
+    }
+}
+
+export const toggleSearchBar = (open) => {
+    return dispatch => {
+        dispatch({
+            type: SET_SEARCHBAR_OPEN,
             open,
         })
     }

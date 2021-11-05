@@ -19,6 +19,7 @@ function Home() {
   const featureMovies = useSelector((state) => state.movies.featureMovies);
   const data = useSelector((state) => state.movies.movies);
   const navbarMenuOpen = useSelector((state) => state.auth.navbarMenuOpen);
+  const searchBarOpen = useSelector((state) => state.auth.searchBarOpen);
 
   const [homeScreenLoading, setHomeScreenLoading] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -108,7 +109,7 @@ function Home() {
     <div className="container">
       <div
         className={
-          !navbarMenuOpen ? "features-section top" : "features-section"
+          !navbarMenuOpen && !searchBarOpen ? "features-section top" : "features-section"
         }
       >
         {data.length !== 0 ? (
