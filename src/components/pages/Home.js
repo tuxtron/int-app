@@ -18,6 +18,7 @@ function Home() {
   const currentToken = useSelector((state) => state.auth.token);
   const featureMovies = useSelector((state) => state.movies.featureMovies);
   const data = useSelector((state) => state.movies.movies);
+  const navbarMenuOpen = useSelector((state) => state.auth.navbarMenuOpen);
 
   const [homeScreenLoading, setHomeScreenLoading] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -109,7 +110,7 @@ function Home() {
           </div>
       ) : (
         <div className="container">
-            <div className="features-section">
+            <div className={!navbarMenuOpen ? 'features-section top' : 'features-section'}>
                 {
                     data.length !== 0 ? (
                         <img class="card-background" src={data[0].movies[currentSlide].movie.imageCover} alt="bg"/>

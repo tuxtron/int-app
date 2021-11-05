@@ -39,7 +39,7 @@ function MovieDetail(props) {
   //       movie = featureMovies.filter(m => m.title === movieName)[0];
   //     }
   //   }
-  console.log("movie: ", movie);
+//   console.log("movie: ", movie);
 
   if (!movie && allMovies.length !== 0) {
     setMovie(allMovies.filter((m) => m.movie.title === movieName)[0].movie);
@@ -57,7 +57,7 @@ function MovieDetail(props) {
   }, [currentToken]);
 
   useEffect(() => {
-      console.log("bucle")
+    //   console.log("bucle")
     if (movie) {
       isFavourite(movie);
       function fixMinutes() {
@@ -79,19 +79,19 @@ function MovieDetail(props) {
     try {
       if (window.localStorage.getItem("favs")) {
         favs = JSON.parse(window.localStorage.getItem("favs"));
-        console.log("My favs: " + favs);
+        // console.log("My favs: " + favs);
       }
       if (favs.length !== 0) {
         const aux = favs.filter((fav) => fav._id !== m._id);
-        console.log("AUX: " + JSON.stringify(aux));
+        // console.log("AUX: " + JSON.stringify(aux));
         if (aux.length === favs.length) favs[favs.length] = m;
         else favs = aux;
       } else favs[favs.length] = m;
       window.localStorage.setItem("favs", JSON.stringify(favs));
-      console.log("FAVS: " + window.localStorage.getItem("favs"));
-      console.log(
-        "CANT FAVS: " + JSON.parse(window.localStorage.getItem("favs")).length
-      );
+    //   console.log("FAVS: " + window.localStorage.getItem("favs"));
+    //   console.log(
+    //     "CANT FAVS: " + JSON.parse(window.localStorage.getItem("favs")).length
+    //   );
     } catch (e) {
       console.log("Error: ", e);
     }

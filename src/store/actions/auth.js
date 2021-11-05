@@ -6,6 +6,7 @@ export const SIGN_UP = 'SIGN_UP';
 export const SET_USER = 'SET_USER';
 export const SIGN_OUT = 'SIGN_OUT';
 export const SET_TOKEN = 'SET_TOKEN';
+export const SET_NAVBAR_OPEN = 'SET_NAVBAR_OPEN';
 
 const SSO_BASE_API_URL = 'https://singlesignonbackend.herokuapp.com/api/users/';
 const PACKAGE_BASE_API_URL = 'https://suscripciones-backend.herokuapp.com/api/';
@@ -20,8 +21,8 @@ export const login = (email, password, history, errorCallback) => {
         })
         .then( res => {
             if (res.status === 200) {
-                console.log( 'ÉXITO: SSO-API /login' ); 
-                console.log( 'Resultado del usuario: \n', res.data);
+                // console.log( 'ÉXITO: SSO-API /login' ); 
+                // console.log( 'Resultado del usuario: \n', res.data);
                 const user = jwt_decode(res.data.token);
                 dispatch({
                     type: LOGIN,
@@ -60,7 +61,7 @@ export const setUserData = (user) => {
 }
 
 export const setUserToken = (token) => {
-    console.log(token);
+    // console.log(token);
     return dispatch => {
         dispatch({
             type: SET_TOKEN,
@@ -84,7 +85,7 @@ export const signOut = () => {
 }
 
 export const signUp = (email, password, name, last_name, phone, selectedPackage, nextStep, errorCallback) => {
-    console.log({email, password, name, last_name});
+    // console.log({email, password, name, last_name});
     return async dispatch => {
         await axios.post(SSO_BASE_API_URL + 'register', {
             email,
@@ -96,8 +97,8 @@ export const signUp = (email, password, name, last_name, phone, selectedPackage,
         })
         .then( res => {
             if (res.status === 201) {
-                console.log( 'ÉXITO: SSO-API /register' ); 
-                console.log( 'Resultado del register: \n', res.data);
+                // console.log( 'ÉXITO: SSO-API /register' ); 
+                // console.log( 'Resultado del register: \n', res.data);
                 axios.post(PACKAGE_BASE_API_URL + 'subscriptions/v1/create', {
                     id_usuario: res.data.user._id,
                     paquetes: selectedPackage,
@@ -139,12 +140,12 @@ export const signUp = (email, password, name, last_name, phone, selectedPackage,
 
 export const checkTokenExpiration = (currentToken, history, landing = false) => {
     return dispatch => {
-        console.log('INICIAR TOKEN CHECK')
+        // console.log('INICIAR TOKEN CHECK')
         const lsUserData = JSON.parse(localStorage.getItem('notflixUserData'));
         const lsUserToken = localStorage.getItem('notflixUserToken');
         const currentTime = new Date().getTime();
         if (!lsUserData && !currentToken) {
-            console.log('NO CURRENT NI LS USER DATA');
+            // console.log('NO CURRENT NI LS USER DATA');
             history.push( landing ? '/' : '/login');
         } else if (lsUserData && !currentToken) {
             if (lsUserData.exp && new Date(lsUserData.exp * 1000) > currentTime) {
@@ -158,16 +159,15 @@ export const checkTokenExpiration = (currentToken, history, landing = false) => 
                     type: SET_USER,
                     user: lsUserData
                 })
-                console.log('AUTOMATIC LOGIN OK');
+                // console.log('AUTOMATIC LOGIN OK');
             } else {
                 history.push( landing ? '/' : '/login');
-
-                console.log('AUTOMATIC LOGIN FAILED -> Expired');
+                // console.log('AUTOMATIC LOGIN FAILED -> Expired');
             }
         } else if (!lsUserData && currentToken) {
             const user = jwt_decode(currentToken);
             if (!(user.exp && new Date(user.exp * 1000) > currentTime)) {
-                console.log('CURRENT TOKEN EXPIRED');
+                // console.log('CURRENT TOKEN EXPIRED');
                 history.push( landing ? '/' : '/login');
 
             }
@@ -176,11 +176,11 @@ export const checkTokenExpiration = (currentToken, history, landing = false) => 
             let currentUserExpTime = currentUser.exp ? currentUser.exp * 1000 : undefined;
             let lsUserExpTime = lsUserData.exp ? lsUserData.exp * 1000 : undefined;
             if (!currentUserExpTime && !lsUserExpTime) {
-                console.log('NO TOKEN TO LOGIN');
+                // console.log('NO TOKEN TO LOGIN');
                 history.push( landing ? '/' : '/login');
             } else if (!currentUserExpTime && lsUserExpTime) {
                 if (lsUserExpTime > currentTime) {
-                    console.log('AUTOMATIC LOGIN SUCCESS');
+                    // console.log('AUTOMATIC LOGIN SUCCESS');
                     dispatch({
                         type: SET_TOKEN,
                         payload: {
@@ -192,18 +192,18 @@ export const checkTokenExpiration = (currentToken, history, landing = false) => 
                         user: lsUserData
                     })
                 } else {
-                    console.log('AUTOMATIC LOGIN FAILED');
+                    // console.log('AUTOMATIC LOGIN FAILED');
                     history.push( landing ? '/' : '/login');
                 }
             } else if (currentUserExpTime && !lsUserExpTime) {
                 if (currentUserExpTime < currentTime) {
-                    console.log('AUTOMATIC LOGIN FAILED');
+                    // console.log('AUTOMATIC LOGIN FAILED');
                     history.push( landing ? '/' : '/login');
                 }
             } else if (currentUserExpTime && lsUserExpTime) {
                 if (lsUserExpTime > currentUserExpTime) {
                     if (lsUserExpTime > currentTime) {
-                        console.log('HAS BOTH TOKEN NOT EXPIRED, LOGIN SUCCESS');
+                        // console.log('HAS BOTH TOKEN NOT EXPIRED, LOGIN SUCCESS');
                         dispatch({
                             type: SET_TOKEN,
                             payload: {
@@ -215,14 +215,23 @@ export const checkTokenExpiration = (currentToken, history, landing = false) => 
                             user: lsUserData
                         })
                     } else {
-                        console.log('HAS BOTH BUT BOTH EXPIRED, LOGIN FAILED');
+                        // console.log('HAS BOTH BUT BOTH EXPIRED, LOGIN FAILED');
                         history.push( landing ? '/' : '/login');
                     }
                 } else if (currentUserExpTime < currentTime) {
-                    console.log('HAS BOTH BUT BOTH EXPIRED, LOGIN FAILED');
+                    // console.log('HAS BOTH BUT BOTH EXPIRED, LOGIN FAILED');
                     history.push( landing ? '/' : '/login');
                 }
             }
         }  
+    }
+}
+
+export const toggleNavBar = (open) => {
+    return dispatch => {
+        dispatch({
+            type: SET_NAVBAR_OPEN,
+            open,
+        })
     }
 }

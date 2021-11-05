@@ -106,6 +106,10 @@
 .features-section {
     position: relative;
 
+    &.top {
+        z-index: 1000;
+    }
+
     .card-background {
         position: absolute;
         height: 110%;

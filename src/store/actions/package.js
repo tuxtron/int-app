@@ -9,8 +9,8 @@ export const getAllPackages = () => {
         await 
             axios.get(PACKAGE_BASE_API_URL + 'packages/v1/list')
             .then( res => {
-                console.log( 'ÉXITO: PACK-SUBS-API /packages/v1/list' ); 
-                console.log( 'Resultado del paquetes: \n', res.data.data);
+                // console.log( 'ÉXITO: PACK-SUBS-API /packages/v1/list' ); 
+                // console.log( 'Resultado del paquetes: \n', res.data.data);
 
                 dispatch({
                     type: SET_ALL_PACKAGES,

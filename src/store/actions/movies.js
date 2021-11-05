@@ -6,7 +6,7 @@ export const SET_ALL_MOVIES = 'SET_ALL_MOVIES';
 const CMS_BASE_API_URL = 'https://ia-cms.herokuapp.com/api/v1/';
 
 export const getCmsMovies = (token, loadingHandler = undefined) => {
-    console.log(token);
+    // console.log(token);
     return async dispatch => {
         await axios.get(CMS_BASE_API_URL + 'public/web', {
             headers: {

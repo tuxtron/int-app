@@ -29,7 +29,7 @@ function Navbar() {
 
     useEffect(() => {
         localStorage.setItem('showFavModal', false);
-        console.log(localStorage.getItem("showFavModal"));
+        // console.log(localStorage.getItem("showFavModal"));
         authActions.checkTokenExpiration(token, history);
         function handleClickOutside(event) {
             if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
@@ -50,6 +50,7 @@ function Navbar() {
     }
 
     const toggleMenu = () => {
+        dispatch(authActions.toggleNavBar(!showMenu));
         setShowMenu(!showMenu);
     }
 
@@ -94,7 +95,7 @@ function Navbar() {
     const openFavModal = () => {
         toggleMenu();
         localStorage.setItem('showFavModal', true);
-        console.log(localStorage.getItem("showFavModal"));
+        // console.log(localStorage.getItem("showFavModal"));
     }
 
     const signOutBtnClicked = () => {

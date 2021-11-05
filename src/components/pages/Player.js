@@ -16,7 +16,7 @@ function Player(props) {
         history.push('/home');
     } 
 
-    console.log(movieUrl);
+    // console.log(movieUrl);
 
   return (
     <div className="player-container">

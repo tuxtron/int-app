@@ -7,7 +7,7 @@ import "react-multi-carousel/lib/styles.css";
 
 function FavouriteSlider(props) {
 
-    console.log('MOVIES F: ', props.movies);
+    // console.log('MOVIES F: ', props.movies);
     const category = props.category;
 
     var settings = {
@@ -62,11 +62,6 @@ function FavouriteSlider(props) {
             },
         ],
         swipeToSlide: true,
-        afterChange: function(index) {
-            console.log(
-            `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
-            );
-        }
     };
 
   return (

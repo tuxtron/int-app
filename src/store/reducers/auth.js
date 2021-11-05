@@ -2,13 +2,15 @@ import {
     LOGIN,
     SET_USER,
     SIGN_OUT,
-    SET_TOKEN
+    SET_TOKEN,
+    SET_NAVBAR_OPEN,
 } from '../actions/auth';
 
 const initialState = {
     loggedUser: undefined,
     token: undefined,
     isUserLogged: false,
+    navbarMenuOpen: false,
     // loggedUser: {
     //     admin: false,
     //     email: "chyao@test.com",
@@ -50,6 +52,11 @@ const authReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 token: action.payload.token
+            }
+        case SET_NAVBAR_OPEN:
+            return {
+                ...state,
+                navbarMenuOpen: action.open
             }
         default:
             return state;
