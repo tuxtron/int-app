@@ -177,7 +177,7 @@ function Home() {
                     </Drawer.Title>
                 </Drawer.Header>
                 <Drawer.Body className="drawer-body">
-                    {window.localStorage.getItem("favs") ? (
+                    {JSON.parse(window.localStorage.getItem("favs")).length !== 0 ? (
                     <FavouriteSlider
                         movies={JSON.parse(window.localStorage.getItem("favs"))}
                         category={"Favoritos"}

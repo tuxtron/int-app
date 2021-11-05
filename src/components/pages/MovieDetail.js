@@ -75,6 +75,9 @@ function MovieDetail(props) {
   }, [movie]);
 
   const updateFavs = (m) => {
+
+    setIsFav(!isFav);
+
     let favs = [];
     try {
       if (window.localStorage.getItem("favs")) {
@@ -83,20 +86,15 @@ function MovieDetail(props) {
       }
       if (favs.length !== 0) {
         const aux = favs.filter((fav) => fav._id !== m._id);
-        // console.log("AUX: " + JSON.stringify(aux));
+        //console.log("AUX: " + JSON.stringify(aux));
         if (aux.length === favs.length) favs[favs.length] = m;
         else favs = aux;
       } else favs[favs.length] = m;
       window.localStorage.setItem("favs", JSON.stringify(favs));
-    //   console.log("FAVS: " + window.localStorage.getItem("favs"));
-    //   console.log(
-    //     "CANT FAVS: " + JSON.parse(window.localStorage.getItem("favs")).length
-    //   );
+      
     } catch (e) {
       console.log("Error: ", e);
     }
-
-    isFavourite(m);
   };
 
   const isFavourite = (m) => {
@@ -107,12 +105,11 @@ function MovieDetail(props) {
     } else {
       setIsFav(false);
     }
-
     if (favs.length !== 0) {
       const aux = favs.filter((fav) => fav._id !== m._id);
-      if (aux.length === favs.length) setIsFav(true);
+      if (aux.length === favs.length) setIsFav(false);
       else {
-        setIsFav(false);
+        setIsFav(true);
       }
     } else {
       setIsFav(false);
@@ -178,7 +175,7 @@ function MovieDetail(props) {
               <div className="detail-title-container">
                 <p className="detail-movie-title">{movie.title}</p>
                 <div className="svg-title">
-                {isFav /*<FontAwesomeIcon icon={faHeart}/>*/ ? (
+                {!isFav ? (
                   <AiOutlineHeart
                     style={{
                       margin: 20,
