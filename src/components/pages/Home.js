@@ -80,7 +80,7 @@ function Home() {
 
   setTimeout(() => {
     setHomeScreenLoading(false);
-  }, 2000)
+  }, 2000);
 
   useEffect(() => {
     setFavmodal(JSON.parse(localStorage.getItem("showFavModal")));
@@ -98,101 +98,111 @@ function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentToken]);
 
-  return (
-      (data.length === 0 || featureMovies.length === 0 || homeScreenLoading) ? (
-          <div className="loader-container">
-            <Loader
-                type="ThreeDots"
-                color="#F4AA3F"
-                height={50}
-                width={50}
-            />
-          </div>
-      ) : (
-        <div className="container">
-            <div className={!navbarMenuOpen ? 'features-section top' : 'features-section'}>
-                {
-                    data.length !== 0 ? (
-                        <img class="card-background" src={data[0].movies[currentSlide].movie.imageCover} alt="bg"/>
-                    ) : null
-                }
-                <Slider {...settings}>
-                {data.length !== 0
-                    ? data[0].movies.map((movie, index) => {
-                        return (
-                        <Link
-                            key={index}
-                            to={{
-                            pathname: `/detail/${data[0].name}/` + movie.movie.title,
-                            movie: movie.movie,
-                            }}
-                        >
-                            <div
-                            className={
-                                index === currentSlide
-                                ? "active-feature-card"
-                                : "blur-feature-card"
-                            }
-                            >
-                            {/* <img className="feature-img" src={movie.url} alt="movie" /> */}
-                            <img
-                                className="feature-img"
-                                src={movie.movie.imageCover}
-                                alt="movie"
-                            />
-                            </div>
-                        </Link>
-                        );
-                    })
-                    : null}
-                </Slider>
-            </div>
-            <div className="category-section">
-                {data.map((category, index) => {
-                    if ( index !== 0 ) {
-                        return (
-                            <div key={index} style={{ width: "100%" }}>
-                            <p className="category-title">{category.name}</p>
-                                <CategorySlider
-                                    movies={category.movies}
-                                    category={category.name}
-                                ></CategorySlider>
-                            </div>
-                        );
-                    }
-                    return null;
-                })}
-            </div>
-            {favModal ? (
-                <Drawer
-                size="lg"
-                placement="top"
-                open={favModal}
-                onClose={() => {setFavmodal(false); localStorage.setItem("showFavModal", false)}}
-                
-                >
-                <Drawer.Header className="drawer-header">
-                    <Drawer.Title style={{ color: "#FFFF" }}>
-                    Mis Favoritos
-                    </Drawer.Title>
-                </Drawer.Header>
-                <Drawer.Body className="drawer-body">
-                    {JSON.parse(window.localStorage.getItem("favs")).length !== 0 ? (
-                    <FavouriteSlider
-                        movies={JSON.parse(window.localStorage.getItem("favs"))}
-                        category={"Favoritos"}
-                    />
-                    ) : (
-                    <p>
-                        Aún no tienes películas en favoritos, ¿Qué estas esperando para
-                        agregar una?
-                    </p>
-                    )}
-                </Drawer.Body>
-                </Drawer>
-            ) : null}
-            </div>
-      )
+  return data.length === 0 ||
+    featureMovies.length === 0 ||
+    homeScreenLoading ? (
+    <div className="loader-container">
+      <Loader type="ThreeDots" color="#F4AA3F" height={50} width={50} />
+    </div>
+  ) : (
+    <div className="container">
+      <div
+        className={
+          !navbarMenuOpen ? "features-section top" : "features-section"
+        }
+      >
+        {data.length !== 0 ? (
+          <img
+            class="card-background"
+            src={data[0].movies[currentSlide].movie.imageCover}
+            alt="bg"
+          />
+        ) : null}
+        <Slider {...settings}>
+          {data.length !== 0
+            ? data[0].movies.map((movie, index) => {
+                return (
+                  <Link
+                    key={index}
+                    to={{
+                      pathname: `/detail/${data[0].name}/` + movie.movie.title,
+                      movie: movie.movie,
+                    }}
+                  >
+                    <div
+                      className={
+                        index === currentSlide
+                          ? "active-feature-card"
+                          : "blur-feature-card"
+                      }
+                    >
+                      {/* <img className="feature-img" src={movie.url} alt="movie" /> */}
+                      <img
+                        className="feature-img"
+                        src={movie.movie.imageCover}
+                        alt="movie"
+                      />
+                    </div>
+                  </Link>
+                );
+              })
+            : null}
+        </Slider>
+      </div>
+      <div className="category-section">
+        {data.map((category, index) => {
+          if (index !== 0) {
+            return (
+              <div key={index} style={{ width: "100%" }}>
+                <p className="category-title">{category.name}</p>
+                <CategorySlider
+                  movies={category.movies}
+                  category={category.name}
+                ></CategorySlider>
+              </div>
+            );
+          }
+          return null;
+        })}
+      </div>
+      {favModal ? (
+        <Drawer
+          size="lg"
+          placement="top"
+          open={favModal}
+          onClose={() => {
+            setFavmodal(false);
+            localStorage.setItem("showFavModal", false);
+          }}
+        >
+          <Drawer.Header className="drawer-header">
+            <Drawer.Title style={{ color: "#FFFF" }}>
+              Mis Favoritos
+            </Drawer.Title>
+          </Drawer.Header>
+          <Drawer.Body className="drawer-body">
+            {window.localStorage.getItem("favs") ? (
+              JSON.parse(window.localStorage.getItem("favs")).length !== 0 ? (
+                <FavouriteSlider
+                  movies={JSON.parse(window.localStorage.getItem("favs"))}
+                  category={"Favoritos"}
+                />
+              ) : (
+                <p>
+                  Aún no tienes películas en favoritos, ¿Qué estas esperando
+                  para agregar una?
+                </p>
+              )
+            ) : (
+              <p>
+                Aún no tienes películas en favoritos, ¿Qué estas esperando para
+                agregar una?
+              </p>
+            )}
+          </Drawer.Body>
+        </Drawer>
+      ) : null}
+    </div>
   );
 }
 
