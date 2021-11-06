@@ -18,7 +18,6 @@ function ConfirmDialog(props) {
 
     const goToAutogestion = () => {
         window.open(`https://facturacion-front.vercel.app/?from=web&token=${token}`);
-        setOpen(false);
     }
 
   return (

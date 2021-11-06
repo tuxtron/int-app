@@ -19,7 +19,7 @@ export default function SignUp(props) {
   const dispatch = useDispatch();
   const allAvailablePackages = useSelector(
     (state) => state.package.allAvailablePackages
-  ).filter((pack) => pack.estado === "activo");
+  ).filter((pack) => pack.estado === "activo" || pack.estado === "ACTIVO");
 
   if (!props.location.state) {
     history.goBack();

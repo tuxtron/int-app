@@ -38,7 +38,7 @@ function Login(props) {
   const handleSignup = () => {
     if (!checkEmailPattern()) {
       setOpenEmailPatternModal(true);
-    } else if (password !== confirmPassword) {
+    } else if (password !== confirmPassword || password === '' || confirmPassword === '') {
       setOpenPasswordModal(true);
     } else {
       history.push({
@@ -170,7 +170,7 @@ function Login(props) {
         open={openPasswordModal}
         closeHandler={() => setOpenPasswordModal(false)}
         title="Contraseñas incorrectas"
-        body="Las contraseñas ingresadas no coinciden, por favor ingresá nuevamente"
+        body="Las contraseñas ingresadas son inválidas o no coinciden, por favor ingresá nuevamente"
       />
       <ConfirmDialog
         open={openEmailPatternModal}
