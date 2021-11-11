@@ -20,6 +20,8 @@ function MovieDetail(props) {
   const [durationInMinutes, setDurationInMinutes] = useState(0);
   const [isFav, setIsFav] = useState(false);
 
+  const [longTitle, setLongTitle] = useState(false);
+
   const dispatch = useDispatch();
   const history = useHistory();
   const currentToken = useSelector((state) => state.auth.token);
@@ -39,7 +41,7 @@ function MovieDetail(props) {
   //       movie = featureMovies.filter(m => m.title === movieName)[0];
   //     }
   //   }
-//   console.log("movie: ", movie);
+  //   console.log("movie: ", movie);
 
   if (!movie && allMovies.length !== 0) {
     setMovie(allMovies.filter((m) => m.movie.title === movieName)[0].movie);
@@ -60,12 +62,15 @@ function MovieDetail(props) {
     //   console.log("bucle")
     if (movie) {
       isFavourite(movie);
+      if (movie.title.length > 35) {
+        setLongTitle(true);
+      }
       function fixMinutes() {
         let hours = 0;
         let minutes = movie.duration;
         while (minutes >= 60) {
           hours += 1;
-          minutes -=60;
+          minutes -= 60;
         }
         setDurationInMinutes(minutes);
         setDurationInHours(hours);
@@ -75,7 +80,6 @@ function MovieDetail(props) {
   }, [movie]);
 
   const updateFavs = (m) => {
-
     setIsFav(!isFav);
 
     let favs = [];
@@ -91,7 +95,6 @@ function MovieDetail(props) {
         else favs = aux;
       } else favs[favs.length] = m;
       window.localStorage.setItem("favs", JSON.stringify(favs));
-      
     } catch (e) {
       console.log("Error: ", e);
     }
@@ -116,6 +119,12 @@ function MovieDetail(props) {
     }
   };
 
+  const toggleLongTitle = () => {
+    if (movie.title.length > 35) {
+      setLongTitle(!longTitle);
+    }
+  };
+
   const handlePlay = async (url) => {
     setPlayerSpinner(true);
     await axios
@@ -136,7 +145,7 @@ function MovieDetail(props) {
             state: { movieUrl: url },
           });
         } else {
-            setPlayerSpinner(false);
+          setPlayerSpinner(false);
           console.log("No autorizado");
         }
       })
@@ -173,37 +182,42 @@ function MovieDetail(props) {
           >
             <div className="detail-card-left">
               <div className="detail-title-container">
-                <p className="detail-movie-title">{movie.title}</p>
-                <div className="svg-title">
-                {!isFav ? (
-                  <AiOutlineHeart
-                    style={{
-                      margin: 20,
-                      fontSize: 40,
-                      color: "rgba(255, 177, 65, 0.8)",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => {
-                      updateFavs(movie);
-                    }}
-                  />
+                {longTitle ? (
+                  <p onMouseEnter={toggleLongTitle} className="detail-movie-title">
+                    {movie.title.slice(0, 35) + "..."}
+                  </p>
                 ) : (
-                  <AiFillHeart
-                    style={{
-                      margin: 20,
-                      fontSize: 40,
-                      color: "rgba(255, 177, 65, 0.8)",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => {
-                      updateFavs(movie);
-                    }}
-                  />
+                  <p onMouseLeave={toggleLongTitle} className="detail-movie-title">{movie.title}</p>
                 )}
+                <div className="svg-title">
+                  {!isFav ? (
+                    <AiOutlineHeart
+                      style={{
+                        margin: 20,
+                        fontSize: 40,
+                        color: "rgba(255, 177, 65, 0.8)",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => {
+                        updateFavs(movie);
+                      }}
+                    />
+                  ) : (
+                    <AiFillHeart
+                      style={{
+                        margin: 20,
+                        fontSize: 40,
+                        color: "rgba(255, 177, 65, 0.8)",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => {
+                        updateFavs(movie);
+                      }}
+                    />
+                  )}
                 </div>
               </div>
               <div className="tags-rows">
-
                 <span className="detail-tags">
                   {new Date(movie.launch).getFullYear()}
                 </span>
@@ -218,7 +232,6 @@ function MovieDetail(props) {
                   <span>★ </span>
                   <span>{movie.value}</span>
                 </span>
-
               </div>
               <p className="detail-descriptions">{movie.description}</p>
             </div>

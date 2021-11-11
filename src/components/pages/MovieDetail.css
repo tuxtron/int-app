@@ -114,6 +114,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    max-width: 80%;
 }
 .detail-card-rigth{
     flex: 1;
