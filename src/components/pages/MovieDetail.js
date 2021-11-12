@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./MovieDetail.css";
+import "./MovieDetail.scss";
 import arrowimage from "../../assets/icons/arrowRight.svg";
 import { Link, useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";

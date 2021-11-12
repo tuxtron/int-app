@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, {useState} from 'react';
-import './Player.css';
+import './Player.scss';
 import VideoPlayer from 'react-video-js-player';
 import { useHistory } from 'react-router-dom';
 import ConfirmDialog from '../ConfirmDialog';
