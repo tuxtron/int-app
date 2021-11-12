@@ -107,14 +107,10 @@ function Home() {
     </div>
   ) : (
     <div className="container">
-      <div
-        className={
-          !navbarMenuOpen && !searchBarOpen ? "features-section top" : "features-section"
-        }
-      >
+      <div className="features-section">
         {data.length !== 0 ? (
           <img
-            class="card-background"
+            className="card-background"
             src={data[0].movies[currentSlide].movie.imageCover}
             alt="bg"
           />

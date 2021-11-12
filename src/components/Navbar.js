@@ -21,6 +21,7 @@ function Navbar() {
   const [openSearchMenu, setOpenSearch] = useState(false);
 
   const allMovies = useSelector((state) => state.movies.allMovies);
+  const moviesByCategories = useSelector((state) => state.movies.movies);
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -66,11 +67,14 @@ function Navbar() {
     if (searchedMovies.length === 0) {
       return <p>No se encontró ninguna película</p>;
     } else {
-      return uniqueMovies.map((movie) => {
+      return uniqueMovies.map((movie, index) => {
+          const catIndex = moviesByCategories.findIndex((c) => c.movies.some(m => m.movie._id === movie.movie._id));
+          const category = moviesByCategories[catIndex].name || '';
         return (
           <Link
+            key={index}
             to={{
-              pathname: `/detail/${movie.category}/${movie.movie.title}`,
+              pathname: `/detail/${category}/${movie.movie.title}`,
               movieUrl: movie.movieUrl,
             }}
             className="result"
@@ -173,38 +177,40 @@ function Navbar() {
                     <span className="mid"></span>
                     <span className="bot"></span>
                   </div>
-                  <div
-                    className={showMenu ? "menu-content" : "menu-content hide"}
-                  >
-                    <div className="triangle"></div>
-                    <div className="user-logo-container">
-                      <img
-                        className="user-icon"
-                        src={require("../assets/icons/user.svg")}
-                        alt="logo"
-                      />
-                    </div>
-                    <p className="menu-name">
-                      {user ? user.name + " " + user.last_name : ""}
-                    </p>
-                    <p className="menu-email">{user ? user.email : ""}</p>
-                    <div
-                      className="self-managment-btn"
-                      onClick={openFavModal}
-                      style={{ marginTop: "15px" }}
-                    >
-                      <p>Mis Favoritos</p>
-                    </div>
-                    <div
-                      className="self-managment-btn"
-                      onClick={openSelfManagmentWindow}
-                    >
-                      <p>Autogestión</p>
-                    </div>
-                    <div className="sign-out-btn" onClick={signOutBtnClicked}>
-                      <p>Cerrar sesión</p>
-                    </div>
-                  </div>
+                  {
+                      showMenu ? (
+                        <div className="menu-content">
+                            <div className="triangle"></div>
+                            <div className="user-logo-container">
+                            <img
+                                className="user-icon"
+                                src={require("../assets/icons/user.svg")}
+                                alt="logo"
+                            />
+                            </div>
+                            <p className="menu-name">
+                            {user ? user.name + " " + user.last_name : ""}
+                            </p>
+                            <p className="menu-email">{user ? user.email : ""}</p>
+                            <div
+                            className="self-managment-btn"
+                            onClick={openFavModal}
+                            style={{ marginTop: "15px" }}
+                            >
+                            <p>Mis Favoritos</p>
+                            </div>
+                            <div
+                            className="self-managment-btn"
+                            onClick={openSelfManagmentWindow}
+                            >
+                            <p>Autogestión</p>
+                            </div>
+                            <div className="sign-out-btn" onClick={signOutBtnClicked}>
+                            <p>Cerrar sesión</p>
+                            </div>
+                        </div>
+                      ) : null
+                  }
                 </div>
               ) : null}
               {location.pathname === "/" || location.pathname === "/sign-up" ? (
