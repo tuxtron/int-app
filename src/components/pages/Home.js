@@ -20,6 +20,8 @@ function Home() {
   const data = useSelector((state) => state.movies.movies);
   const navbarMenuOpen = useSelector((state) => state.auth.navbarMenuOpen);
   const searchBarOpen = useSelector((state) => state.auth.searchBarOpen);
+  const currentUser = useSelector((state) => state.auth.loggedUser);
+  const [currentUserID, setCurrentUserID] = useState('');
 
   const [homeScreenLoading, setHomeScreenLoading] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -82,6 +84,10 @@ function Home() {
   setTimeout(() => {
     setHomeScreenLoading(false);
   }, 2000);
+
+  useEffect(() => {
+    if (currentUser) { setCurrentUserID(currentUser._id) }
+  }, [currentUser])
 
   useEffect(() => {
     setFavmodal(JSON.parse(localStorage.getItem("showFavModal")));
@@ -178,10 +184,10 @@ function Home() {
             </Drawer.Title>
           </Drawer.Header>
           <Drawer.Body className="drawer-body">
-            {window.localStorage.getItem("favs") ? (
-              JSON.parse(window.localStorage.getItem("favs")).length !== 0 ? (
+            {window.localStorage.getItem(`favs${currentUserID}`) ? (
+              JSON.parse(window.localStorage.getItem(`favs${currentUserID}`)).length !== 0 ? (
                 <FavouriteSlider
-                  movies={JSON.parse(window.localStorage.getItem("favs"))}
+                  movies={JSON.parse(window.localStorage.getItem(`favs${currentUserID}`))}
                   category={"Favoritos"}
                 />
               ) : (

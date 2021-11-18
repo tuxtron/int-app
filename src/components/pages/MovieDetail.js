@@ -25,7 +25,8 @@ function MovieDetail(props) {
   const dispatch = useDispatch();
   const history = useHistory();
   const currentToken = useSelector((state) => state.auth.token);
-  // console.log(movie);
+  const currentUser = useSelector((state) => state.auth.loggedUser);
+  const [currentUserID, setCurrentUserID] = useState('');
   // const categories = useSelector(state => state.movies.categories);
   const allMovies = useSelector((state) => state.movies.allMovies);
 
@@ -47,6 +48,10 @@ function MovieDetail(props) {
     setMovie(allMovies.filter((m) => m.movie.title === movieName)[0].movie);
     setLoading(false);
   }
+
+  useEffect(() => {
+    if (currentUser) { setCurrentUserID(currentUser._id) }
+  }, [currentUser])
 
   useEffect(() => {
     if (allMovies.length === 0) {
@@ -84,8 +89,8 @@ function MovieDetail(props) {
 
     let favs = [];
     try {
-      if (window.localStorage.getItem("favs")) {
-        favs = JSON.parse(window.localStorage.getItem("favs"));
+      if (window.localStorage.getItem(`favs${currentUserID}`)) {
+        favs = JSON.parse(window.localStorage.getItem(`favs${currentUserID}`));
         // console.log("My favs: " + favs);
       }
       if (favs.length !== 0) {
@@ -94,7 +99,7 @@ function MovieDetail(props) {
         if (aux.length === favs.length) favs[favs.length] = m;
         else favs = aux;
       } else favs[favs.length] = m;
-      window.localStorage.setItem("favs", JSON.stringify(favs));
+      window.localStorage.setItem(`favs${currentUserID}`, JSON.stringify(favs));
     } catch (e) {
       console.log("Error: ", e);
     }
@@ -103,8 +108,8 @@ function MovieDetail(props) {
   const isFavourite = (m) => {
     let favs = [];
 
-    if (window.localStorage.getItem("favs")) {
-      favs = JSON.parse(window.localStorage.getItem("favs"));
+    if (window.localStorage.getItem(`favs${currentUserID}`)) {
+      favs = JSON.parse(window.localStorage.getItem(`favs${currentUserID}`));
     } else {
       setIsFav(false);
     }
