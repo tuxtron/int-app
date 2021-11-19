@@ -27,6 +27,8 @@ function MovieDetail(props) {
   const currentToken = useSelector((state) => state.auth.token);
   const currentUser = useSelector((state) => state.auth.loggedUser);
   const [currentUserID, setCurrentUserID] = useState('');
+  const [band, setBand] = useState(false);
+  if (currentUser && !band) { setCurrentUserID(currentUser._id); setBand(true); console.log(currentUserID);}
   // const categories = useSelector(state => state.movies.categories);
   const allMovies = useSelector((state) => state.movies.allMovies);
 
@@ -50,10 +52,6 @@ function MovieDetail(props) {
   }
 
   useEffect(() => {
-    if (currentUser) { setCurrentUserID(currentUser._id) }
-  }, [currentUser])
-
-  useEffect(() => {
     if (allMovies.length === 0) {
       dispatch(authActions.checkTokenExpiration(currentToken, history));
       if (currentToken) {
@@ -64,9 +62,12 @@ function MovieDetail(props) {
   }, [currentToken]);
 
   useEffect(() => {
+    if(movie) {isFavourite(movie);}
+  }, [])
+
+  useEffect(() => {
     //   console.log("bucle")
     if (movie) {
-      isFavourite(movie);
       if (movie.title.length > 35) {
         setLongTitle(true);
       }
@@ -113,6 +114,7 @@ function MovieDetail(props) {
     } else {
       setIsFav(false);
     }
+    console.log("FAVS", favs)
     if (favs.length !== 0) {
       const aux = favs.filter((fav) => fav._id !== m._id);
       if (aux.length === favs.length) setIsFav(false);
